@@ -31,6 +31,11 @@ body {
     padding: 4px 10px;  
 }
 
+#refresh:hover {
+    background-color: cornflowerblue;
+    color: white;
+}
+
 #status {
     font-weight: bold;
 }
