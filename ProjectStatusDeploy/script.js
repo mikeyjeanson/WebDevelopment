@@ -12,13 +12,17 @@ const forestGreen = '#228B22'
 const dark = '#434343'
 
 // Spreadsheet and sheet configuration
-const sheetID = '1YUpM6XB_Yjm3l6NW4gwxMqR_Vz7g_O2YFENxvUMduT0';
+const sheetID = '1XZYk6cK27ArIYF-t66FrK1HQZ6-H5AdHHjptWZNxetc';
 const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
-const sheetName = 'Sheet1';
+const sheetName = 'Projects';
 
 // Query construction and URL generation
-const q = document.currentScript.getAttribute('query');
+const project = document.currentScript.getAttribute('project');
+console.log(project)
+const q = `Select B WHERE A="${project}"`
+console.log(q)
 const query = encodeURIComponent(q);
+console.log(query)
 const url = `${base}sheet=${sheetName}&tq=${query}`;
 
 // On DOM Content Loaded, initialize
@@ -62,11 +66,11 @@ function getStatus(callback) {
     .then(response => {
         // Parse JSON response and extract data
         const jsonData = JSON.parse(response.substring(47).slice(0, -2));
-        // console.log(jsonData)
-        // console.log(`${jsonData.table.rows[0].c[0].v}`)
+        console.log(jsonData)
+        console.log(`${jsonData.table.rows[0].c[0].v}`)
         if(jsonData.table.rows[0]) {
             console.log('Data fetched successfully:', jsonData.table.rows[0].c[0].v)
-            STATUS_ACTUAL = jsonData.table.rows[0].c[0].v
+            STATUS_ACTUAL = jsonData.table.rows[0].c[0].v == 'Empty Queue' ? 0 : 1
             callback()
         }
         else {

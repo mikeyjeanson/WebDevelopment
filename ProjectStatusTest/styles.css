@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.project_status {
+    text-align: center;
+    color: #434343;
+}
+
+.static_header {
+    font-size: 36pt;
+    margin-bottom: 0px;
+}
+
+.description {
+    font-size: 12pt;
+}
+
+#refresh {
+    font-family: 'Lato', sans-serif;
+    
+    border: solid 2px cornflowerblue;
+    border-radius: 10px;
+    background-color: transparent;
+
+    color: cornflowerblue;
+
+    padding: 4px 10px;  
+}
+
+#refresh:hover {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#status {
+    font-weight: bold;
+}
