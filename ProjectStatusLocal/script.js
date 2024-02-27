@@ -10,6 +10,7 @@ let statusSpan = null
 const fireBrick = '#B22222'
 const forestGreen = '#228B22'
 const dark = '#434343'
+const cornflowerBlue = '#6495ed'
 
 // Spreadsheet and sheet configuration
 const sheetID = '1XZYk6cK27ArIYF-t66FrK1HQZ6-H5AdHHjptWZNxetc';
@@ -41,12 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function refresh() {
-    if(Date.now() - lastRequestTime > 5000) {
+    if(Date.now() - lastRequestTime > 1000) {
         lastRequestTime = Date.now()
+        statusSpan.style.color = cornflowerBlue 
         getStatus(setStatusText)
-    }
-    else {
-        alert("Wait at least 5 seconds before refreshing the Status.")
     }
 }
 

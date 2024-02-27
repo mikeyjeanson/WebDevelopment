@@ -25,7 +25,7 @@ body {
     border-radius: 10px;
     background-color: transparent;
 
-    color: cornflowerblue;
+    color: #6495ed;
 
     padding: 4px 10px;  
 }
@@ -33,6 +33,11 @@ body {
 #refresh:hover {
     background-color: cornflowerblue;
     color: white;
+}
+
+#refresh:focus:active {
+    border: solid 2px cornflowerblue;
+    background-color: steelblue;
 }
 
 #status {
