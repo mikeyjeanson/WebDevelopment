@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function refresh() {
     if(Date.now() - lastRequestTime > 1000) {
         lastRequestTime = Date.now()
+        statusSpan.innerHTML = "refreshing..."
         statusSpan.style.color = cornflowerBlue 
         getStatus(setStatusText)
     }
