@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet"/>
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
+            "showdown": "https://cdn.jsdelivr.net/npm/showdown@2.0.3/dist/showdown.min.js"
+          }
+        }
+    </script>
+    <title>Embedded Tips</title>
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://lh4.googleusercontent.com/T4eBOhLzWqFjB8jwb4agVqi8d_tup3kvDzbJgV9pUxkRM6TftpTtJdCThP8Uxl_obf9d200juECqWOcXCosWr9IYP06lXUr9j-U3d82lZdSKqs-yMuauY3Y1Xokoz2CzTQ=w1280" id="header-image"/>
+        <div class="header-text">
+            <span id="header-title" class="lato-light">Tips for Vanilla</span>
+            <p id="header-description">The most recent tips are at the top. Older tips might become outdated, if you are unsure check with a Team Lead or QA.</p>
+        </div>
+    </div> <!--header-container-->
+    <div id="tips-container"></div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

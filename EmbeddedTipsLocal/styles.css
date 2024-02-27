@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #247d78;
+    padding: 0;
+    margin: 0;
+}
+
+.lato-light {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.header-container {
+    display: flex;
+    color: white;
+    justify-content: center;
+    margin: 0 10vw;
+}
+
+.header-text {
+    padding: 40px 20px;
+}
+
+#header-image {
+    padding: 20px;
+    object-fit: cover;
+    min-width: 0;
+}
+
+.header-text,
+#header-image {
+    flex: 1;
+}
+
+#header-title {
+    font-size: 34pt;
+}
+
+#header-description {
+    font-size: 11pt;
+    line-height: 24px;
+    color: #f3f3f3
+}
+
+#tips-container {
+    margin: 0;
+}
+
+#tips-container > * > .tip:nth-child(odd) {
+    background-color: white;
+}
+#tips-container > * > .tip:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.tip {
+    padding: 20px 12vw;
+}
+
+.tip > hr {
+    margin: 0;
+}
+
+.tip-dropdown, .tip-description {
+    padding: 0px 4px;   
+}
+
+.tip-dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+    width: 100%;
+    align-items: center;
+}
+
+.tip-dropdown > h1 {
+    color: #247d78;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 19pt;
+}
+
+.tip-dropdown > button {
+    margin: 0 40px;
+    background-color: transparent;
+    width: 50px;   
+    text-align: center;
+    border: none;
+    color:#247d78;
+    border-radius: 20px;
+    padding: 4px;
+}
+
+.tip-dropdown > button:hover {
+    color: white;
+    border:solid 2px #247d78;
+    background-color: #247d78;
+}
+
+.tip-description {
+    color: #434343;
+    font-size: 11pt;
+}
