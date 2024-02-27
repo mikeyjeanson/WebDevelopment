@@ -19,11 +19,8 @@ const sheetName = 'Projects';
 
 // Query construction and URL generation
 const project = document.currentScript.getAttribute('project');
-console.log(project)
 const q = `Select B WHERE A="${project}"`
-console.log(q)
 const query = encodeURIComponent(q);
-console.log(query)
 const url = `${base}sheet=${sheetName}&tq=${query}`;
 
 // On DOM Content Loaded, initialize
