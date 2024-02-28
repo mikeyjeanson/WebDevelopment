@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import { html } from 'htm/preact';
 
-function TipComponent({ date, title, tip, imageUrl }) {
+export default function TipComponent({ date, title, tip, imageUrl }) {
     const [showDescription, setShowDescription] = useState(false);
 
     const toggleDescription = () => {
@@ -26,5 +26,4 @@ function TipComponent({ date, title, tip, imageUrl }) {
         </div>
     `;
 }
-
-export default TipComponent;
+window.TipComponent = TipComponent

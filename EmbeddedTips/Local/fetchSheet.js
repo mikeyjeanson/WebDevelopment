@@ -63,3 +63,4 @@ export default async function fetchSheet(sheetName, offset = 0, limit = 5, query
             });   
     })
 }
+window.fetchSheet = fetchSheet
