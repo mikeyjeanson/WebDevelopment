@@ -1,7 +1,7 @@
 import { html, render } from 'htm/preact';
 import { useEffect, useState } from 'preact/hooks'
-import TipComponent from './Components/tipComponent.js';
-import fetchSheet from './fetchSheet.js';
+import { TipComponent } from 'embedded-tips/Components/tipComponent.js'
+import { fetchSheet } from 'embedded-tips/fetchSheet.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
