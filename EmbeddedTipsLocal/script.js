@@ -8,7 +8,8 @@ const limit = 2
 
 function App() {
     const [tips, setTips] = useState([]);
-    const [more, setMore] = useState(true)
+    const [triggerMore, fireTriggerMore] = useState(true)
+    const [isMore, setIsMore] = useState(true)
 
     useEffect(() => {
         console.log("useEffect...", tips)
@@ -16,21 +17,23 @@ function App() {
             .then((data) => {
                 setTips(prev => {
                     offset += data.length
+                    if (data.length < limit) { setIsMore(false) }
                     return [...prev, ...data]
                 })
             })
             .catch((error) => (console.error(error)))
-    }, [more]);
+    }, [triggerMore]);
 
     const getMore = () => {
-        setMore(!more)
+        fireTriggerMore(!triggerMore)
     }
 
     return html`
         <div>
             ${tips.map(tip => html`<${TipComponent} ...${tip} />`)}
         </div>
-        <button class="show-more" onClick=${getMore}>Show More</button>
+        ${isMore ? html`
+        <button class="show-more" onClick=${getMore}>Show More</button>` : ''}
     `;
 }
 
