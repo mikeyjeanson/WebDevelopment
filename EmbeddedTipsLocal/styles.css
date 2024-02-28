@@ -14,10 +14,9 @@ body {
 
 .header-container {
     display: flex;
-    color: white;
     justify-content: center;
     padding: 0 10vw;
-    background-color: #247d78;
+    background-color: var(--primary-color);
 }
 
 .header-text {
@@ -26,9 +25,13 @@ body {
 
 #header-image {
     padding: 20px;
-    object-fit: cover;
     min-width: 0;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    object-fit: cover;
 }
+
 
 .header-text,
 #header-image {
@@ -36,13 +39,14 @@ body {
 }
 
 #header-title {
+    color: var(--header-title-color);
     font-size: 34pt;
 }
 
 #header-description {
     font-size: 11pt;
     line-height: 24px;
-    color: #f3f3f3
+    color: var(--header-description-color)
 }
 
 #tips-container {
@@ -50,10 +54,10 @@ body {
 }
 
 #tips-container > * > .tip:nth-child(odd) {
-    background-color: white;
+    background-color: var(--odd-color);
 }
 #tips-container > * > .tip:nth-child(even) {
-    background-color: #f1f1f1;
+    background-color: var(--even-color);
 }
 
 .tip {
@@ -77,7 +81,7 @@ body {
 }
 
 .tip-dropdown > h1 {
-    color: #247d78;
+    color: var(--primary-color);
     font-family: "Lato", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -96,25 +100,26 @@ body {
 .show-more {
     background-color: transparent;
     text-align: center;
-    color:#247d78;
+    color: var(--primary-color);
 }
 
 .tip-dropdown > button:hover,
 .show-more:hover {
     color: white;
-    border:solid 2px #247d78;
-    background-color: #247d78;
+    border:solid 2px var(--primary-color);
+    background-color: var(--primary-color);
 }
 
 .tip-dropdown > button:active,
 .show-more:active {
     color: white;
-    border:solid 2px darkslategray;
-    background-color: #247d78;
+    /*border:solid 2px darkslategray;*/
+    background-color: var(--primary-color);
+    box-shadow: inset 2px 2px 10px 2px rgba(0,0,0,0.3)
 }
 
 .tip-description {
-    color: #434343;
+    color: var(--tip-description-color);
     font-size: 11pt;
     line-height: 24px;
 }
@@ -129,5 +134,5 @@ body {
     justify-content: center;
     align-items: center;
     padding: 4px;
-    border:solid 1px #247d78;
+    border:solid 1px var(--primary-color);
 }

@@ -1,8 +1,7 @@
-export default async function fetchSheet(offset = 0, limit = 5) {
+export default async function fetchSheet(sheetName, offset = 0, limit = 5, query = '') {
     // Spreadsheet and sheet configuration
     const sheetID = '1y3OgECLXcMZ1_0VfetPv7CdQvYUik9Pb7Cdl2lLRP_Q';
     const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
-    const sheetName = 'Tips';
 
     /* 
     Example Queries:
@@ -13,9 +12,11 @@ export default async function fetchSheet(offset = 0, limit = 5) {
     */
     
     // Query construction and URL generation
-    const q = `Select A,B,C,D ORDER BY A desc LIMIT ${limit} OFFSET ${offset}`; // Select all columns
-    const query = encodeURIComponent(q);
-    const url = `${base}sheet=${sheetName}&tq=${query}`;
+    if(query == '') {
+        query = `Select A,B,C,D ORDER BY A desc LIMIT ${limit} OFFSET ${offset}`; // Select all columns
+    }
+    const encodedQuery = encodeURIComponent(query);
+    const url = `${base}sheet=${sheetName}&tq=${encodedQuery}`;
 
     // Data storage and initialization
     const data = [];
@@ -37,16 +38,14 @@ export default async function fetchSheet(offset = 0, limit = 5) {
                     if (heading.label) {
                         const cleanLabel = heading.label
                             .toLowerCase()
-                            .replace(/[\s+|_|\W](.)/g, match => match.toUpperCase())
-                            .replace(/\s/, '');
+                            .replace(/[\s+|_|\W](.)/g, match => match.toUpperCase()) // camel-case
+                            .replace(/\s/, ''); // remove whitespace
                         labels.push(cleanLabel);
                     }
                 });
 
-                const rows = jsonData.table.rows;
-
                 // Create data objects from each row
-                rows.forEach(row => {
+                jsonData.table.rows.forEach(row => {
                     const rowObject = {}
                     labels.forEach((label, index) => {
                         rowObject[label] = row.c[index].v // Access cell value
