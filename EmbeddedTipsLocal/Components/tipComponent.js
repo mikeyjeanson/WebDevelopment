@@ -1,24 +1,26 @@
 import { useState } from 'preact/hooks';
 import { html } from 'htm/preact';
 
-function TipComponent({ date, title, description, imageUrl }) {
+function TipComponent({ date, title, tip, imageUrl }) {
     const [showDescription, setShowDescription] = useState(false);
 
     const toggleDescription = () => {
         setShowDescription(!showDescription);
     };
 
+    const dateObject = new Date(eval("new " + date));
+
     return html`
         <div class="tip">
             <div class="tip-dropdown" onClick=${toggleDescription}>
-                <h1>Tip ${date} - ${title}</h1>
+                <h1>Tip ${dateObject.toLocaleDateString('en-US')} - ${title}</h1>
                 <button>${showDescription ? 'Hide' : 'Show'}</button>
             </div>
             <hr></hr>
             ${showDescription ? html`
             <div class="tip-description">
-                <p>${description}</p>
-                ${imageUrl ? html`<img src="${""}" alt="Tip Image"/>` : ''}
+                <p dangerouslySetInnerHTML=${{__html: tip}}></p>
+                ${imageUrl ? html`<img src="${imageUrl}" alt="Tip Image"/>` : ''}
             </div>
             ` : ''}
         </div>

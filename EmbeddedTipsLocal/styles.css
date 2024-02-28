@@ -2,7 +2,6 @@
 
 body {
     font-family: 'Lato', sans-serif;
-    background-color: #247d78;
     padding: 0;
     margin: 0;
 }
@@ -17,7 +16,8 @@ body {
     display: flex;
     color: white;
     justify-content: center;
-    margin: 0 10vw;
+    padding: 0 10vw;
+    background-color: #247d78;
 }
 
 .header-text {
@@ -86,22 +86,48 @@ body {
 
 .tip-dropdown > button {
     margin: 0 40px;
-    background-color: transparent;
-    width: 50px;   
-    text-align: center;
-    border: none;
-    color:#247d78;
+    width: 50px; 
     border-radius: 20px;
-    padding: 4px;
+    padding: 4px; 
+    border: none;
 }
 
-.tip-dropdown > button:hover {
+.tip-dropdown > button,
+.show-more {
+    background-color: transparent;
+    text-align: center;
+    color:#247d78;
+}
+
+.tip-dropdown > button:hover,
+.show-more:hover {
     color: white;
     border:solid 2px #247d78;
+    background-color: #247d78;
+}
+
+.tip-dropdown > button:active,
+.show-more:active {
+    color: white;
+    border:solid 2px darkslategray;
     background-color: #247d78;
 }
 
 .tip-description {
     color: #434343;
     font-size: 11pt;
+    line-height: 24px;
+}
+
+.show-more {
+    border-radius: 20px;
+    font-size: 16pt;
+    margin: 20px auto;
+    width: 160px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border:solid 1px #247d78;
 }
