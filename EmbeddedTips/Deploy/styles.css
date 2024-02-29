@@ -129,6 +129,12 @@ main {
     line-height: 24px;
 }
 
+.tip-description a {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .show-more {
     border-radius: 20px;
     font-size: 16pt;
