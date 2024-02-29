@@ -4,6 +4,15 @@ body {
     font-family: 'Lato', sans-serif;
     padding: 0;
     margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    min-height: 90vh;
 }
 
 .lato-light {
@@ -135,4 +144,30 @@ body {
     align-items: center;
     padding: 4px;
     border:solid 1px var(--primary-color);
+}
+
+#footer {
+    background-color: var(--primary-color);
+    color: var(--header-title-color);
+    display: flex;
+    flex-direction: column;
+    padding: 2vh;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    bottom: 0;
+
+    flex: 0 0 80x;
+}
+
+#footer > p {
+    flex: 0 0 auto;
+    margin: 5px;
+    text-align: center;
+}
+
+#footer > p > a {
+    color: var(--header-title-color);
+    font-weight: bold;
 }
