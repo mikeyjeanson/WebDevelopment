@@ -1,4 +1,4 @@
-export default async function fetchSheet(sheetName) {
+export default async function fetchSheet(sheetName, offset = 0, limit = 5, query = '') {
     // Spreadsheet and sheet configuration
     const sheetID = '1s7HmtvfU9ctYnxQ-KZaaGivOVBkOKJzz2uEk8HAYn5s';
     const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
@@ -12,7 +12,9 @@ export default async function fetchSheet(sheetName) {
     */
     
     // Query construction and URL generation
-    const query = `Select A,B,C,D ORDER BY A desc LIMIT 1`;
+    if(query == '') {
+        query = `Select A,B,C,D ORDER BY A desc LIMIT ${limit} OFFSET ${offset}`; // Select all columns
+    }
     const encodedQuery = encodeURIComponent(query);
     const url = `${base}sheet=${sheetName}&tq=${encodedQuery}`;
 

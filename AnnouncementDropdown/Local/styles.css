@@ -51,4 +51,6 @@ body {
 
 #desc-img {
     width: 100%;
+    object-fit: order;
+    max-height: 400px;
 }
