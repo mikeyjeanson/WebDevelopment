@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Define Page Colors-->
+    <style>
+        :root {
+            --primary-color: #3c78d8;
+            --header-title-color: #ffffff;
+            --header-description-color: #f3f3f3;
+            --odd-color: #ffffff;
+            --even-color: #f1f1f1;
+            --description-color: #434343;
+        }
+    </style> <!--End Page Colors-->
+    <!--Link Style Sheet-->
+    <link 
+        href="styles.css" 
+        rel="stylesheet"
+    />
+    <!--Import Map-->
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+          }
+        }
+    </script>
+    <!--Project Specific Imports-->
+    <script type="module" 
+        src="./fetchSheet.js">
+    </script>
+    <title>Announcement Banner</title>
+</head>
+<body>
+    <script type="module"
+        src="./script.js"
+        sheetName="ICE: Vanill"
+        link="https://www.google.com"
+    ></script>
+</body>
+</html>
