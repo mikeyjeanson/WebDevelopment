@@ -1,4 +1,4 @@
-** Changes that need to be made to each version **
+**Changes that need to be made to each version**
 
 * Colors
 * Title
