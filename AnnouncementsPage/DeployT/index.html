@@ -1,0 +1,69 @@
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Define Page Colors-->
+    <style>
+        :root {
+            --primary-color: #247d78;
+            --header-title-color: #ffffff;
+            --header-description-color: #f3f3f3;
+            --odd-color: #ffffff;
+            --even-color: #f1f1f1;
+            --tip-description-color: #434343;
+        }
+    </style> <!--End Page Colors-->
+    <!--Link Style Sheet-->
+    <link 
+        href="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment/AnnouncementsPage/DeployT/styles.css" 
+        rel="stylesheet"
+    />
+    <!--Import Map-->
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+          }
+        }
+    </script>
+    <!--Project Specific Imports-->
+    <script type="module" 
+        src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment/AnnouncementsPage/DeployT/Components/announcementComponent.js">
+    </script>
+    <script type="module" 
+        src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment/AnnouncementsPage/DeployT/fetchSheet.js">
+    </script>
+    <!--End of Project Specific Imports-->
+    <title>Tips for Vanilla</title>
+</head>
+<body>
+    <main>
+        <div class="header-container">
+            <img 
+                src="https://img.freepik.com/free-vector/greater-than-less-than-sign-wrench-gear-hands-tools-programmer-flat-vector-illustration-programming-coding-process-modern-technology-occupation-concept_74855-24577.jpg?w=2000&t=st=1709602665~exp=1709603265~hmac=857ae4ae8ca8c7f77c1437d1b02160dd8cb2e7c5b1cdd08379718638490bc84e" 
+                id="header-image"
+                alt="Hands holding a wrench, gear, and a folder marked with programming symbols."
+            />
+            <div class="header-text">
+                <span id="header-title" class="lato-light">Past Announcements</span>
+                <p id="header-description">The most recent announcements are at the top. Older announcements might become outdated, if you are unsure check with a Team Lead or QA.</p>
+            </div>
+        </div> <!--header-container-->
+        <div id="tips-container"></div>
+    </main>
+    <div id="footer">
+        <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
+        <p>Please fill out <a href="https://forms.gle/iTwQG76LK57joHzw8">this form</a> to improve the site.</p>
+    </div>
+    <!--Link to the Main Script-->
+    <script 
+        type="module" 
+        src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment/AnnouncementsPage/DeployT/script.js"
+        sheetName="Bulba: Code Eval"
+    >
+    </script>
+</body>
+</html>
