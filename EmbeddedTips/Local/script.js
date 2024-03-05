@@ -30,7 +30,6 @@ function App() {
     useEffect(() => {
         if (!isFetching) {
             setFetching(true)
-            console.log("useEffect...", tips)
             fetchSheet(sheetName, offset, limit, query)
                 .then((data) => {
                     setTips(prev => {
