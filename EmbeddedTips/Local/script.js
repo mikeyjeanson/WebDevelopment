@@ -25,18 +25,29 @@ function App() {
     const [tips, setTips] = useState([]);
     const [triggerMore, fireTriggerMore] = useState(true)
     const [isMore, setIsMore] = useState(true)
+    const [isFetching, setFetching] = useState(false)
 
     useEffect(() => {
-        console.log("useEffect...", tips)
-        fetchSheet(sheetName, offset, limit, query)
-            .then((data) => {
-                setTips(prev => {
-                    offset += data.length
-                    if (data.length < limit) { setIsMore(false) }
-                    return [...prev, ...data]
+        if (!isFetching) {
+            setFetching(true)
+            console.log("useEffect...", tips)
+            fetchSheet(sheetName, offset, limit, query)
+                .then((data) => {
+                    setTips(prev => {
+                        setFetching(false)
+                        offset += data.length
+                        if (data.length < limit) { setIsMore(false) }
+                        return [...prev, ...data]
+                    })
                 })
-            })
-            .catch((error) => (console.error(error)))
+                .catch((error) => {
+                    console.error(error)
+                    setFetching(false)
+                })
+        }
+        else {
+            console.log("Already fetching... please wait.")
+        }
     }, [triggerMore]);
 
     const getMore = () => {
