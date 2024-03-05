@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import { html } from 'htm/preact';
 
-export default function AnnouncementComponent({ date, title, tip, imageUrl }) {
+export default function AnnouncementComponent({ date, title, announcement, imageUrl }) {
     const [showDescription, setShowDescription] = useState(false);
 
     const toggleDescription = () => {
@@ -19,7 +19,7 @@ export default function AnnouncementComponent({ date, title, tip, imageUrl }) {
             <hr></hr>
             ${showDescription ? html`
             <div class="tip-description">
-                <p dangerouslySetInnerHTML=${{__html: tip}}></p>
+                <p dangerouslySetInnerHTML=${{__html: announcement}}></p>
                 ${imageUrl ? html`<img src="${imageUrl}" alt="Tip Image"/>` : ''}
             </div>
             ` : ''}

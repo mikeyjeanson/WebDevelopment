@@ -38,7 +38,7 @@ main {
     position: relative;
     overflow: hidden;
     object-fit: contain;
-    flex: 1 1 200px;
+    flex: 0.7 1 200px;
 }
 
 
@@ -135,6 +135,10 @@ main {
     text-decoration: none;
 }
 
+.tip-description img {
+    max-width: min(100%, 1200px);
+}
+
 .show-more {
     border-radius: 20px;
     font-size: 16pt;
@@ -173,7 +177,7 @@ main {
     font-weight: bold;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .header-container {
         display: flex;
         flex-wrap: wrap;    

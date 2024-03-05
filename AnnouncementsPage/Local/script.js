@@ -22,7 +22,7 @@ const sheetName = script?.getAttribute('sheetName') || '';
 const query = script?.getAttribute('query') || '';
 
 function App() {
-    const [announcements, setannouncements] = useState([]);
+    const [announcements, setAnnouncements] = useState([]);
     const [triggerMore, fireTriggerMore] = useState(true)
     const [isMore, setIsMore] = useState(true)
 
@@ -30,7 +30,7 @@ function App() {
         console.log("useEffect...", announcements)
         fetchSheet(sheetName, offset, limit, query)
             .then((data) => {
-                setannouncements(prev => {
+                setAnnouncements(prev => {
                     offset += data.length
                     if (data.length < limit) { setIsMore(false) }
                     return [...prev, ...data]
