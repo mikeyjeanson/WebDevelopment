@@ -25,18 +25,28 @@ function App() {
     const [announcements, setAnnouncements] = useState([]);
     const [triggerMore, fireTriggerMore] = useState(true)
     const [isMore, setIsMore] = useState(true)
+    const [isFetching, setFetching] = useState(false)
 
     useEffect(() => {
-        console.log("useEffect...", announcements)
-        fetchSheet(sheetName, offset, limit, query)
-            .then((data) => {
-                setAnnouncements(prev => {
-                    offset += data.length
-                    if (data.length < limit) { setIsMore(false) }
-                    return [...prev, ...data]
+        if(!isFetching) {
+            setFetching(true)
+            fetchSheet(sheetName, offset, limit, query)
+                .then((data) => {
+                    setAnnouncements(prev => {
+                        offset += data.length
+                        if (data.length < limit) { setIsMore(false) }
+                        return [...prev, ...data]
+                    })
+                    setFetching(false)
                 })
-            })
-            .catch((error) => (console.error(error)))
+                .catch((error) => {
+                    setFetching(false)
+                    console.log(error)
+                })
+        }
+        else {
+            console.log("Already fetching data... please wait.")
+        }
     }, [triggerMore]);
 
     const getMore = () => {
