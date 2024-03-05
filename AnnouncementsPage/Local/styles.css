@@ -116,6 +116,10 @@ main {
     background-color: var(--primary-color);
 }
 
+hr {
+    width: 100%;
+}
+
 .tip-dropdown > button:active,
 .show-more:active {
     color: white;

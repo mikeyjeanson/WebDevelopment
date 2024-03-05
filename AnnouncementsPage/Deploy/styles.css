@@ -73,6 +73,10 @@ main {
     padding: 20px 12vw;
 }
 
+hr {
+    width: 100%;
+}
+
 .tip-dropdown, .tip-description, .tip > hr {
     padding: 0 12px;
     max-width: 1200px;
