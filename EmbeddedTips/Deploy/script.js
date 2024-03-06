@@ -25,6 +25,7 @@ function App() {
     const [tips, setTips] = useState([]);
     const [triggerMore, fireTriggerMore] = useState(true)
     const [isMore, setIsMore] = useState(true)
+    const [isFetching, setFetching] = useState(false)
 
     useEffect(() => {
         if (!isFetching) {
