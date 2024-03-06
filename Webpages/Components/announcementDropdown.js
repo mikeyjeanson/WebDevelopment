@@ -1,25 +1,8 @@
-import { html, render } from 'htm/preact';
+import { html, Component, render } from 'htm/preact';
 import { useEffect, useState } from 'preact/hooks'
 
-// Dynamically import the module
-const moduleURL = new URL(import.meta.url);
-const scripts = document.querySelectorAll('script[type="module"]');
+export default function AnnouncementDropdown (sheetID, sheetName, announcementPageLink) {
 
-// Find the script element that imports this module
-let script;
-for (const s of scripts) {
-    const scriptURL = new URL(s.src);
-    if (scriptURL.href === moduleURL.href) {
-        script = s;
-        console.log("Script found:", script)
-        break;
-    }
-}
-
-const sheetName = script?.getAttribute('sheetName') || ''
-const announcementPageLink = script?.getAttribute('link') || ''
-
-function App() {
     const [announcement, setAnnouncement] = useState({
         date: 'Date(1,1,2024)',
         title: 'Announcement',
@@ -39,7 +22,7 @@ function App() {
 
     useEffect(() => {
         console.log("useEffect...", announcement)
-        fetchSheet(sheetName)
+        fetchSheet(sheetID, sheetName, 0, 1)
             .then((data) => {
                 if (data.length > 0) {setAnnouncement(data[0])}
             })
@@ -51,7 +34,7 @@ function App() {
             <div id="clickable" onClick=${toggleExpanded}>
                 <p id="title">
                     ${
-                        announcement.tip != '' ?
+                        announcement.announcement != '' ?
                         `Update ${new Date(eval("new " + announcement.date)).toLocaleDateString('en-US')} - ${announcement.title}` :
                         `fetching update...`
                     }
@@ -74,5 +57,4 @@ function App() {
         </div>
     `;
 }
-
-render(html`<${App} />`, document.body)
+window.AnnouncementDropdown = AnnouncementDropdown
