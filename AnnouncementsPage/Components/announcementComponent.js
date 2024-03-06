@@ -13,7 +13,7 @@ export default function AnnouncementComponent({ date, title, announcement, image
     return html`
         <div class="tip">
             <div class="tip-dropdown" onClick=${toggleDescription}>
-                <h1>Tip ${dateObject.toLocaleDateString('en-US')} - ${title}</h1>
+                <h1>Update ${dateObject.toLocaleDateString('en-US')} - ${title}</h1>
                 <button>${showDescription ? 'Hide' : 'Show'}</button>
             </div>
             <hr></hr>
