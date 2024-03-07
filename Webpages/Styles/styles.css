@@ -12,12 +12,27 @@ body {
     flex-direction: column;
 }
 
+/* Basic */
+
+button {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: solid 1px var(--primary-color);
+    border-radius: 6px;
+    padding: 8px;
+}
+
 a,button:hover {
     cursor: pointer;
+    background-color: var(--opaque-primary-color);
 }
 
 button:active {
     box-shadow: inset 2px 0px 4px 2px rgba(0,0,0,0.3);
+}
+
+hr {
+    margin: 4px 12vw;
 }
 
 /* Main Content */
@@ -37,12 +52,18 @@ button:active {
     margin: 0;
 }
 
+.spacer {
+    width: 100%;
+    padding: 40px;
+}
+
 /* Announcement Dropdown */
 
 #announcement-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px;
 }
 
 .announcement-dropdown {
@@ -108,7 +129,7 @@ button:active {
     display: flex;
     justify-content: center;
     align-items: stretch;
-    padding: 0 15vw;
+    padding: 0 12vw;
     padding-bottom: 40px;
 }
 
@@ -122,22 +143,25 @@ button:active {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
 }
 
 .ice-greeting-img > img {
     width: 100%;
-    max-width: 600px;
     object-fit: cover;
+    margin-bottom: -2vw;
 }
 
 .ice-greeting-img > h1 {
-    color: var(--primary-color)
+    color: var(--primary-color);
+    margin-bottom: 0;
 }
 
 .ice-greeting-text {
-    flex: 1 1 800px;
     display: flex;
     flex-direction: column;
+    padding-top: 20px;
+    flex: 1;
 }
 
 .ice-greeting-text > h1 {
@@ -153,22 +177,58 @@ button:active {
     line-height: 20px;
 }
 
+.ice-greeting-text > *:nth-last-child(2) {
+    padding-bottom: 20px;
+}
+
 .ice-greeting-text > ul {
     margin: 0;
 }
 
 .ice-greeting-text > button {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: solid 1px var(--primary-color);
-    border-radius: 6px;
-    padding: 8px;
     margin-top: auto;
 }
 
-.ice-greeting-text > button:hover {
-    background-color: var(--primary-color);
-    color: white;
+/* Quality Tab */
+
+.quality-tab {
+    padding: 40px 12vw 30px 12vw;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.quality-tab > * {
+    padding: 0 20px;
+}
+
+.quality-text {
+    flex: 10 1;
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.quality-text > h1 {
+    font-weight: 300;
+    font-size: 34pt;
+}
+
+.quality-text > p {
+    color: var(--description-color);
+    font-size: 11pt;
+}
+
+.quality-text > button {
+    width: 100%;
+    margin-top: auto;
+}
+
+.quality-img {
+    flex: 8 1;
+    width: 200px;
+    object-fit: cover;
+    aspect-ratio: 5/3;
 }
 
 /* Footer */
