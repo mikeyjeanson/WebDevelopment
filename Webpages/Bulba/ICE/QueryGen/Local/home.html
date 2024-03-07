@@ -11,7 +11,7 @@
             --header-description-color: #f3f3f3;
             --odd-color: #ffffff;
             --even-color: #f1f1f1;
-            --tip-description-color: #434343;
+            --description-color: #434343;
         }
     </style> <!--End Page Colors-->
     <!--Link Style Sheet-->
@@ -31,22 +31,33 @@
     </script>
     <!--End of Import Map-->
     <!--Project Specific-->
-    <script
-        src="../../../../Helpers/fetchSheet.js"
-        type="module"
-    ></script>
-    <script
-        src="../../../../Components/announcementDropdown.js"
-        type="module"
-    ></script>
     <!--End Project Specific-->
     <title>Query Generation</title>
 </head>
 <body>
-    <main class="main-content">
-        <div class="announcement-dropdown">
-            <h1>Dropdown</h1>
+    <main class="content-main">
+        <div id="announcement-container"></div>
+        <div class="ice-greeting">
+            <div class="ice-greeting-img">
+                <img 
+                    src="https://namisttammany.org/wp-content/uploads/sites/330/2023/08/GST-JOS-444-20-1-1536x1024.jpg"
+                    alt="People on a virtual meeting."
+                />
+                <h1>Join the War Room 👆</h1>
+            </div>
+            <div class="ice-greeting-text">
+                <h1>Query Generation</h1>
+                <p>Unlike other projects, Vanilla has its very own team of QAs who are ready to assist you in their own Zoom named "War Room". If you have any questions, they are waiting to help. If the QAs are not available, check the various resources below for help.</p>
+                <p>QA leads host three main office hours (click to see in local time):</p>
+                <ul>
+                    <li>5 AM PST</li>
+                    <li>10 AM PST</li>
+                    <li>2 PM PST</li>
+                </ul>
+                <button>Join the War Room</button>
+            </div>
         </div>
+        <div class="divisor"><h1>Resources</h1></div>
     </main>
     <footer class="bulba-footer">
         <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
@@ -55,6 +66,7 @@
     <script
         src="../script.js"
         type="module"
+        sheetName="ICE: Vanilla"
     ></script>
 </body>
 </html>

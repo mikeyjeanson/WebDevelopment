@@ -8,6 +8,7 @@ body {
 
 .dropdown {
     padding: 40px;
+    background-color: yellow;
 }
 
 #clickable {

@@ -1,7 +1,11 @@
-import { html, Component, render } from 'htm/preact';
+import { html, render } from 'htm/preact';
 import { useEffect, useState } from 'preact/hooks'
+import fetchSheet from '../Helpers/fetchSheet.js';
 
-export default function AnnouncementDropdown (sheetID, sheetName, announcementPageLink) {
+const dateOptions = { month: 'numeric', day: 'numeric' };
+
+const AnnouncementDropdown = (props) => {
+    const {sheetID, sheetName, announcementPageLink} = props
 
     const [announcement, setAnnouncement] = useState({
         date: 'Date(1,1,2024)',
@@ -14,10 +18,6 @@ export default function AnnouncementDropdown (sheetID, sheetName, announcementPa
 
     const toggleExpanded = () =>  {
         setExpanded(prev => !prev)
-        
-        if(expanded) {
-            // rotate expand arrow
-        }
     }
 
     useEffect(() => {
@@ -30,16 +30,16 @@ export default function AnnouncementDropdown (sheetID, sheetName, announcementPa
     }, []);
 
     return html`
-        <div class="dropdown">
-            <div id="clickable" onClick=${toggleExpanded}>
-                <p id="title">
+        <div class="announcement-dropdown">
+            <div class="announcement-clickable" onClick=${toggleExpanded}>
+                <p class="announcement-title">
                     ${
                         announcement.announcement != '' ?
-                        `Update ${new Date(eval("new " + announcement.date)).toLocaleDateString('en-US')} - ${announcement.title}` :
+                        `Update ${new Date(eval("new " + announcement.date)).toLocaleDateString('en-US', dateOptions)} - ${announcement.title}` :
                         `fetching update...`
                     }
                 </p>
-                <img id="expand-arrow"
+                <img class="announcement-expand-arrow"
                     width="20" 
                     height="20" 
                     src="https://img.icons8.com/ios/50/expand-arrow--v2.png" 
@@ -49,12 +49,12 @@ export default function AnnouncementDropdown (sheetID, sheetName, announcementPa
             </div>
             <hr></hr>
             ${expanded ? html`
-            <div id="description">
+            <div class="announcement-description">
                 <p dangerouslySetInnerHTML=${{__html: announcement.announcement}}></p>
-                ${announcement.imageUrl ? html`<img id="desc-img" src="${announcement.imageUrl}" alt="Announcement Image"/>` : ''}
-                <a id="page-link" href=${announcementPageLink}>Past Announcements</a>
+                ${announcement.imageUrl ? html`<img class="announcement-desc-img" src="${announcement.imageUrl}" alt="Announcement Image"/>` : ''}
+                <a class="announcement-page-link" href=${announcementPageLink}>Past Announcements</a>
             </div>` : ''}
         </div>
     `;
 }
-window.AnnouncementDropdown = AnnouncementDropdown
+export default AnnouncementDropdown;

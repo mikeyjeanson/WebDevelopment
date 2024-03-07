@@ -31,10 +31,6 @@ function App() {
 
     const toggleExpanded = () =>  {
         setExpanded(prev => !prev)
-        
-        if(expanded) {
-            // rotate expand arrow
-        }
     }
 
     useEffect(() => {
