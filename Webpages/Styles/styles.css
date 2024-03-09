@@ -22,7 +22,11 @@ button {
     padding: 8px;
 }
 
-a,button:hover {
+a:hover {
+    cursor: pointer;
+}
+
+button:hover {
     cursor: pointer;
     background-color: var(--opaque-primary-color);
 }
@@ -54,7 +58,7 @@ hr {
 
 .spacer {
     width: 100%;
-    padding: 40px;
+    padding: 40px 0;
 }
 
 /* Announcement Dropdown */
@@ -63,7 +67,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
 }
 
 .announcement-dropdown {
@@ -97,8 +101,15 @@ hr {
     margin-right: 20px;
 }
 
+.announcement-dropdown > hr {
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+
 .announcement-description {
     color: var(--description-color);
+    margin-top: 40px;
     font-size: 12pt;
     padding: 0px 20px;
     line-height: 25px;
@@ -133,9 +144,18 @@ hr {
     padding-bottom: 40px;
 }
 
+.ice-greeting > * {
+    padding: 0 10px;
+    min-width: 200px;
+}
+
 @media only screen and (max-width: 600px) {
     .ice-greeting {
         flex-wrap: wrap;
+    }
+
+    .ice-greeting-img > h1 {
+        display: none;
     }
 }
 
@@ -161,6 +181,7 @@ hr {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
+    line-height: 25px;
     flex: 1;
 }
 
@@ -174,7 +195,10 @@ hr {
     font-size: 11pt;
     color: var(--description-color);
     padding-bottom: 0;
-    line-height: 20px;
+}
+
+.ice-greeting-text > *:nth-last-child(3) {
+    margin-bottom: 0;
 }
 
 .ice-greeting-text > *:nth-last-child(2) {
@@ -183,6 +207,11 @@ hr {
 
 .ice-greeting-text > ul {
     margin: 0;
+    line-height: 20px;
+}
+
+.ice-greeting-text > ul a {
+    color: var(--primary-color)
 }
 
 .ice-greeting-text > button {
@@ -217,6 +246,7 @@ hr {
 .quality-text > p {
     color: var(--description-color);
     font-size: 11pt;
+    line-height: 25px;
 }
 
 .quality-text > button {
@@ -230,6 +260,46 @@ hr {
     object-fit: cover;
     aspect-ratio: 5/3;
 }
+
+/* Help Guides */
+
+#help-guide-container {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    margin: 30px 12vw;
+}
+
+/* Guide Card */
+
+.guide-card {
+    flex: 0 1 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    margin: 10px;
+}
+
+.guide-card-img {
+    flex: 1 1 200px;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.guide-card-name {
+    flex: 1;
+    background-color: rgba(255,255,255, 0.3);
+    color: var(--primary-color);
+    width: 100%;
+    text-align: center;
+}
+
+.guide-card a {
+    text-decoration: none;
+}
+
 
 /* Footer */
 
