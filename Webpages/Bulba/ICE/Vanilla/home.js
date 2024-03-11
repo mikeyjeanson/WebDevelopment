@@ -46,15 +46,20 @@ const guides = [
     {
         "title": "Report Issues",
         "imgSrc": "https://lh4.googleusercontent.com/aeiCI-fLfafmNhdQfBefa-ThRWZGXJtOcSsZZ0cBYsA_brNeFwkvJ6FHwnD0eioSoQv6jnZmc-84J19Z0t0ULf5EOhTPNrYTSbQKdRRXgv1IsijLZv6rdnKtTM7C0it50g=w1280",
-        "link": "google.com"
+        "link": "https://google.com"
     }
 ]
 
-// Map guides to a GuideCard
-// definition: const GuideCard = ({ title, imgSrc, link })
-// add them to element with id 'help-guide-container'
+// Map guides to a GuideCard elements
 
 render(
     html`${guides.map(guide => html`<${GuideCard} ...${guide} />`)}`,
     document.getElementById('help-guide-container')
 )
+
+/********* ON CLICK FUNCTIONS **********/
+
+document.getElementById('ice-greeting-img-img').onclick = () => {
+    console.log('go to waroom')
+    // window.open('https://scale.zoom.us/j/93335625928?pwd=WW13OXFQblBwNUdRT2ZwWkZpMm1BZz09', '_blank')
+}

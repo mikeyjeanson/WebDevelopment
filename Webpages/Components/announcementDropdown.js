@@ -20,6 +20,7 @@ const AnnouncementDropdown = (props) => {
         setExpanded(prev => !prev)
     }
 
+    /*
     useEffect(() => {
         console.log("useEffect...", announcement)
         fetchSheet(sheetID, sheetName, 0, 1)
@@ -28,6 +29,7 @@ const AnnouncementDropdown = (props) => {
             })
             .catch((error) => (console.error(error)))
     }, []);
+    */
 
     return html`
         <div class="announcement-dropdown">

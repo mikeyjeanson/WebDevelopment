@@ -1,9 +1,9 @@
-import { html } from 'htm/preact';
+import { html } from 'htm/preact'
 
 const GuideCard = ({ title, imgSrc, link }) => {
     const goToLink = () => {
-        window.open(link, '_blank');
-    };
+        window.location.href = link
+    }
 
     return html`
         <div class="guide-card" onclick=${goToLink}>
@@ -13,7 +13,7 @@ const GuideCard = ({ title, imgSrc, link }) => {
             />    
             <h3 class="guide-card-name">${title}</h3>
         </div>
-    `;
-};
+    `
+}
 
-export default GuideCard;
+export default GuideCard

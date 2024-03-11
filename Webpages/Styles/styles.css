@@ -170,6 +170,7 @@ hr {
     width: 100%;
     object-fit: cover;
     margin-bottom: -2vw;
+    cursor: pointer;
 }
 
 .ice-greeting-img > h1 {
@@ -221,7 +222,7 @@ hr {
 /* Quality Tab */
 
 .quality-tab {
-    padding: 40px 12vw 30px 12vw;
+    padding: 20px 11vw;
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -241,6 +242,7 @@ hr {
 .quality-text > h1 {
     font-weight: 300;
     font-size: 34pt;
+    margin: 10px 0;
 }
 
 .quality-text > p {
@@ -258,7 +260,13 @@ hr {
     flex: 8 1;
     width: 200px;
     object-fit: cover;
-    aspect-ratio: 5/3;
+    aspect-ratio: 19/11;
+}
+
+@media only screen and (max-width: 600px) {
+    .quality-img {
+        display: none;
+    }
 }
 
 /* Help Guides */
@@ -280,6 +288,10 @@ hr {
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     margin: 10px;
+}
+
+.guide-card:hover {
+    cursor: pointer;
 }
 
 .guide-card-img {
