@@ -11,5 +11,4 @@ const TrainingStartPage = ({listener}) => {
         </div>
     `
 }
-
 export default TrainingStartPage
