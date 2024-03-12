@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Define Page Colors-->
+    <style>
+        :root {
+            --primary-color: #247d78;
+            --dark-primary-color: #1b5e5a;
+            --opaque-primary-color: #247d7814;
+            --header-title-color: #ffffff;
+            --header-description-color: #f3f3f3;
+            --odd-color: #ffffff;
+            --even-color: #f1f1f1;
+            --description-color: #434343;
+        }
+    </style> <!--End Page Colors-->
+    <!--Link Style Sheet-->
+    <link 
+        href="../Webpages/Styles/styles.css" 
+        rel="stylesheet"
+    />
+    <!--Import Map-->
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+          }
+        }
+    </script>
+    <!--End of Import Map-->
+    <!--Project Specific-->
+    <!--End Project Specific-->
+    <title>Side by Side Training</title>
+</head>
+<body>
+    <main class="content-main">
+        <div class="training-header">
+            <h1 class="training-header-title">Code Eval Offline Training</h1>
+        </div>
+        <div class="training-body">
+            <div id="training-main">
+
+            </div>
+            <button 
+                id="training-instructions" 
+                href="https://google.com" 
+                target="_blank">
+                Code Eval Instructions
+            </button>
+        </div>
+    </main>
+    <footer class="bulba-footer">
+        <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
+        <p>Please fill out <a href="https://forms.gle/iTwQG76LK57joHzw8">this form</a> to improve the site.</p>
+    </footer>
+    <script
+        src="./training.js"
+        type="module"
+    ></script>
+</body>
+</html>
