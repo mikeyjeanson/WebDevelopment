@@ -334,13 +334,13 @@ hr {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 900px;
     padding: 0 10vw 20px;
 }
 
 #training-main {
     background-color: var(--primary-color);
     width: 100%;
-    min-height: 70vh;
     border-radius: 40px;
     margin-bottom: 20px;
 }
@@ -382,7 +382,62 @@ hr {
     color: white;
 }
 
-#training-instructions {
+.training-prompt {
+    display: flex;
+    place-content: center;
+    background-color: white;
+    border-radius: inherit;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12);
+}
+
+.training-prompt > p > strong {
+    color: var(--primary-color)
+}
+
+#training-prompt-prompt {
+    color: var(--description-color)
+}
+
+.training-respsonses-holder {
+    display: flex;
+    margin: 20px 20px 0px;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+}
+
+.training-response {
+    flex: 1;
+    background-color: white;
+    border-radius: inherit;
+    padding: 20px 20px 20px 10px;
+    margin: 0 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12);
+    max-width: 500px;
+}
+
+.training-response > h3 {
+    color: var(--primary-color);
+    padding-left: 20px;
+}
+
+.training-response:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 4px rgba(0, 0, 0, 0.12);
+}
+
+.training-response:hover ~ .training-response {
+    background-color: rgba(255,255,255, 0.5);
+}
+
+.training-instructions {
+    text-align: center;
+    color: white;
+}
+
+#training-external-instructions {
     max-width: 200px;
 }
 
