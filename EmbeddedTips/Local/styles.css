@@ -77,9 +77,13 @@ a {
     padding: 20px 12vw;
 }
 
+.tip > * {
+    max-width: 1200px;
+}
+
 .tip-dropdown, .tip-description, .tip > hr {
     padding: 0 12px;
-    max-width: 1200px;
+    width: 100%;
     justify-self: center;
     margin: auto;
 }
