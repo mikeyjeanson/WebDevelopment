@@ -1,26 +1,9 @@
 import { html, render } from 'htm/preact'
+import { useState, useEffect } from 'preact/hooks'
 import TrainingStartPage from './Components/trainingStartPage.js'
 import TrainingQuestion from './Components/trainingQuestion.js'
 import TrainingAnswer from './Components/trainingAnswer.js'
-
-/**** CLICK LISTENERS *******/
-
-const startClick = () => {
-    console.log("start click")
-
-    // Start Training
-    render(html`<${TrainingQuestion} clickListener=${questionListener} ...${props} />`, document.getElementById('training-main'))
-}
-
-const questionListener = (event) => {
-    const correct = 'A';
-    const answer = event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B';
-    console.log(answer == correct);
-
-    render(html`<${TrainingAnswer} correct=${answer == correct} reasonHTML=${`<p>Hello World</p>`}/>`, document.getElementById('training-main'));
-}
-
-/***** END OF CLICK LISTENERS ******/
+import trainingFetch from './Components/trainingFetch.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
@@ -38,23 +21,112 @@ for (const s of scripts) {
 }
 
 const project = script?.getAttribute('project')
-let offset = 0
 
 // Set all of the anchor tags to open a new page no matter what
 const mainElement = document.getElementById('training-main')  
 observeMainElement(mainElement);
 
-// Props for testing
-const props = {
-    'prompt': `<p>This <i>is</i> a <strong>default tip</strong>.</p>
-    <ul><li>List in tip.</li><li><a href="https://www.google.com">Link in list in tip</a></li></ul>`,
-    'responseA': `<p>This is my response:</p><ol><li>Juice</li><li>Nectar</li></ol>`,
-    'responseB': `<p>This is my response:</p><ul><li>Fiona</li><li>Shrek</li></ul><a href="https://google.com">Continue</a>`
+/****** MAIN APP ******/
+
+// Enumerator `TrainingMode` (Start, Question, Answer)
+const TrainingMode = Object.freeze({
+    Start: 'start',
+    Question: 'question',
+    Answer: 'answer',
+    Finished: 'finished'
+})
+
+const TrainingApp = () => {
+    // Important App Member Variables
+    const [mode, setMode] = useState(TrainingMode.Start)
+    const [index, setIndex] = useState(0)
+    const[questions, addQuestion] = useState([])
+    const [currentQuestion, setCurrentQuestion] = useState({
+        'prompt': '',
+        'responseA': '',
+        'responseB': '',
+        'answer': '',
+        'reason': ''
+    })
+
+    /**** CLICK LISTENERS *******/
+    const startClick = () => {
+        console.log("start click")
+
+        // Start Training
+        render(html`<${TrainingQuestion} clickListener=${questionListener} ...${currentQuestion} />`, mainElement)
+    }
+
+    const questionListener = (event) => {
+        const answer = event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B';
+        console.log(answer == currentQuestion.answer);
+
+        render(html`<${TrainingAnswer} correct=${answer == currentQuestion.answer} reasonHTML=${currentQuestion.reason}/>`, mainElement);
+    }
+
+    const backButtonListener = () => {
+        console.log('go back')
+    }
+
+    const nextQuestionListener = () => {
+        console.log('next question')
+        setIndex(index + 1)
+    }
+
+    const prevQuestionListener = () => {
+        console.log('prev question')
+        setIndex(index - 1)
+    }
+
+    /***** END OF CLICK LISTENERS ******/
+
+    console.log('current question: ', currentQuestion)
+
+    // Fetch New Question or Get Old Question
+    useEffect(() => {
+        console.log('Index changed: ', index)
+
+        // For Old Question
+        if (index < questions.length) {
+            console.log(index, questions[index])
+            setCurrentQuestion(questions[index])
+        }
+        else {
+            // For New Question
+            trainingFetch(project, index)
+            .then((data) => {
+                console.log(data)
+                if (data?.prompt != '') {
+                    setCurrentQuestion(...data)
+                    addQuestion(prev => {
+                        console.log('previous: ', prev)
+                        return [...prev, currentQuestion]
+                    })
+                }
+            })
+            .catch((error) => (console.error(error)))
+        }
+    }, [index])
+
+    // Change what is rendered
+    useEffect(() => {
+        console.log('Change Render mode: ', mode)
+    }, [mode])
+
+    if (mode == TrainingMode.Start) {
+        return html`<${TrainingStartPage} listener=${startClick} />`
+    }
+    else if (mode == TrainingMode.Question) {
+
+    }
+    else if (mode == TrainingMode.Answer) {
+
+    }
 }
 
+render (html`<${TrainingApp} />`, mainElement)
 
-
-render(html`<${TrainingStartPage} listener=${startClick} />`, document.getElementById('training-main'))
+/***** END OF MAIN APP ****/
 
 /**** HELPER FUNCTIONS ******/
 
@@ -72,4 +144,4 @@ function observeMainElement(mainElement) {
     });
   
     observer.observe(mainElement, { childList: true, subtree: true });
-  }
+}
