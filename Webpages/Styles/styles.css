@@ -392,8 +392,10 @@ hr {
     border-radius: inherit;
     min-width: 400px;
     width: fit-content;
-    max-width: 1000px;
-    margin: 20px auto;
+    max-width: 80%;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12);
 }
@@ -418,11 +420,29 @@ hr {
 
 .training-response {
     flex: 1;
+    width: 100px;
     background-color: white;
     border-radius: inherit;
     margin: 10px;
     padding: 20px 20px 20px 10px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12);
+}
+
+.training-respose > p code {
+    background-color: #e3e3e3;
+    color: var(--primary-color)
+}
+
+/* Increase font size for code snippets */
+.training-response pre[class*="language-"],
+.training-prompt pre[class*="language-"] {
+    font-size: 10pt;
+}
+
+/* Increase font size for inline code */
+.training-response code[class*="language-"] ,
+.training-prompt code[class*="language-"] {
+    font-size: 10pt;
 }
 
 .training-response > * {

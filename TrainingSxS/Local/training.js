@@ -83,9 +83,7 @@ const TrainingApp = () => {
     }
 
     const nextQuestionListener = () => {
-        setOffset(prevOffset => {
-            return prevOffset + 1
-        })
+        setOffset(prevOffset => prevOffset + 1 )
     }
 
     const prevQuestionListener = () => {
@@ -130,6 +128,13 @@ const TrainingApp = () => {
             console.log("Already fetching new question...")
         }
     }, [offset])
+
+    useEffect(() => {
+        // highlight possible code syntax
+        console.log('highlighting...')
+        Prism.highlightAll();
+        console.log('done highlighting...')
+    }, [mode, currentQuestion]);
 
     if (mode == TrainingMode.Start) {
         return html`<${TrainingStartPage} listener=${startClick} />`
@@ -179,10 +184,10 @@ function observeMainElement(mainElement) {
     const observer = new MutationObserver(mutationRecords => {
       for (const record of mutationRecords) {
         if (record.type === 'childList') {
-          const anchors = document.querySelectorAll('a');
-          anchors.forEach(anchor => {
-            anchor.setAttribute('target', '_blank');
-            anchor.setAttribute('rel', 'noopener noreferrer');
+            const anchors = document.querySelectorAll('a');
+            anchors.forEach(anchor => {
+                anchor.setAttribute('target', '_blank');
+                anchor.setAttribute('rel', 'noopener noreferrer');
           });
         }
       }
