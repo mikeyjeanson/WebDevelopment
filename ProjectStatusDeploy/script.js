@@ -55,7 +55,6 @@ function setStatusText() {
 
 function getStatus(callback) {
     // Fetch data from Google Sheet API
-    console.log('Fetching data from Google Sheet...');
     STATUS_ACTUAL = -1
 
     fetch(url)
@@ -66,12 +65,8 @@ function getStatus(callback) {
         console.log(jsonData)
         console.log(`${jsonData.table.rows[0].c[0].v}`)
         if(jsonData.table.rows[0]) {
-            console.log('Data fetched successfully:', jsonData.table.rows[0].c[0].v)
             STATUS_ACTUAL = jsonData.table.rows[0].c[0].v == 'Empty Queue' ? 0 : 1
             callback()
-        }
-        else {
-            console.log('Data not found with query:', q)
         }
     })
 }
