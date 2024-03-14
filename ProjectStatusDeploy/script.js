@@ -48,7 +48,6 @@ function refresh() {
 }
 
 function setStatusText() {
-    console.log("Setting status text...")
     statusSpan.innerHTML = getStatusText(STATUS_ACTUAL)
     statusSpan.style.color = getColor(STATUS_ACTUAL)
 }
