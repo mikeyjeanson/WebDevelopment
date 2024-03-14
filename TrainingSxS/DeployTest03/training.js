@@ -59,8 +59,11 @@ const TrainingApp = () => {
     }
 
     const questionListener = (event) => {
-        setAnswer(event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B')
-        setMode(TrainingMode.Answer)
+        // Do nothing if the target was a link
+        if (event.target.tagName.toLowerCase() == 'a') return
+    
+        setAnswer(event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B');
+        setMode(TrainingMode.Answer);
     }
 
     const backButtonListener = () => {
