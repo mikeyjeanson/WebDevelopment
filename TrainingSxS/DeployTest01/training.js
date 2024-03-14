@@ -38,11 +38,11 @@ const TrainingMode = Object.freeze({
 
 const TrainingApp = () => {
     // Important App Member Variables
-    const [isFetching, setFetching] = useState(false)
+    const [isFetching, setFetching] = useState(true)
     const [answer, setAnswer] = useState('A')
 
     const [mode, setMode] = useState(TrainingMode.Start)
-    const [offset, setOffset] = useState(0)
+    const [offset, setOffset] = useState(-1)
     const [questions, addQuestion] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState({
         'prompt': '',
@@ -54,8 +54,8 @@ const TrainingApp = () => {
 
     /**** CLICK LISTENERS *******/
     const startClick = () => {
-        console.log("start click")
-        setMode(TrainingMode.Question)
+        setFetching(false)
+        setOffset(0)
     }
 
     const questionListener = (event) => {
@@ -64,37 +64,27 @@ const TrainingApp = () => {
     }
 
     const backButtonListener = () => {
-        console.log('go back')
+        setMode(TrainingMode.Question)
     }
 
     const nextQuestionListener = () => {
-        console.log('next question')
-        console.log('offset', offset)
         setOffset(prevOffset => {
-            console.log('changing')
             return prevOffset + 1
         })
     }
 
     const prevQuestionListener = () => {
-        console.log('prev question')
         setOffset(prevOffset => prevOffset - 1)
     }
 
     /***** END OF CLICK LISTENERS ******/
 
-    console.log('current question: ', offset, currentQuestion)
-
     // Fetch New Question or Get Old Question
     useEffect(() => {
-        console.log('Offset changed: ', offset)
-
         // For Old Question
-        if (offset < questions.length) {
+        if (offset < questions.length && !isFetching) {
             console.log(offset, questions[offset])
             setCurrentQuestion(questions[offset])
-
-            // Change Mode
             setMode(TrainingMode.Question)
         }
         else if(!isFetching) {
@@ -107,13 +97,11 @@ const TrainingApp = () => {
                     setCurrentQuestion(...data)
                     addQuestion(prev => {
                         console.log('previous: ', prev)
-                        return [...prev, currentQuestion]
+                        return [...prev, ...data]
                     })
-                    // Change Mode
                     setMode(TrainingMode.Question)
                 }
                 else {
-                    console.log('training finished')
                     setMode(TrainingMode.Finished)
                 }
                 setFetching(false)
@@ -128,11 +116,6 @@ const TrainingApp = () => {
         }
     }, [offset])
 
-    // Change what is rendered
-    useEffect(() => {
-        console.log('Change Render mode: ', mode)
-    }, [mode])
-
     if (mode == TrainingMode.Start) {
         return html`<${TrainingStartPage} listener=${startClick} />`
     }
@@ -142,7 +125,7 @@ const TrainingApp = () => {
                 clickListener=${questionListener} 
                 ...${currentQuestion}
                 backListener=${offset > 0 ? prevQuestionListener : null}
-                nextListener=${offset < questions.length ? nextQuestionListener : null}
+                nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
             />
         `
     }
@@ -172,9 +155,8 @@ const TrainingApp = () => {
     }
 }
 
+// Render TrainingApp
 render (html`<${TrainingApp} />`, mainElement)
-
-/***** END OF MAIN APP ****/
 
 /**** HELPER FUNCTIONS ******/
 
