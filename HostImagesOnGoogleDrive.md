@@ -10,5 +10,5 @@
 
 6.  Go to the link with the replaced id.
 7. Relace the size parameter that is set to 220 by default.
-	* [https://lh3.googleusercontent.com/d/14hz3ySPn-zBd4Tu3NtY1F05LSGdFfWvp=s**220**?authuser=]()
-	* [https://lh3.googleusercontent.com/d/14hz3ySPn-zBd4Tu3NtY1F05LSGdFfWvp=s**1000**?authuser=0]()
+	* [https://lh3.googleusercontent.com/d/14hz3ySPn-zBd4Tu3NtY1F05LSGdFfWvp=s**220**?authuser=](https://lh3.googleusercontent.com/d/14hz3ySPn-zBd4Tu3NtY1F05LSGdFfWvp=s220?authuser=)
+	* [https://lh3.googleusercontent.com/d/14hz3ySPn-zBd4Tu3NtY1F05LSGdFfWvp=s**1000**?authuser=0](https://lh3.googleusercontent.com/d/14hz3ySPn-zBd4Tu3NtY1F05LSGdFfWvp=s1000?authuser=)
