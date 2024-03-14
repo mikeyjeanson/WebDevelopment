@@ -464,8 +464,66 @@ hr {
 }
 
 .training-instructions {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
     color: white;
+}
+
+.training-instructions h4 {
+    order: 0;
+    position: sticky;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.training-instructions > .training-back-arrow {
+    order: -1;
+    margin-right: auto;
+}
+
+.training-instructions > .training-forward-arrow {
+    order: 1;
+    position: sticky;
+    margin-left: auto;
+}
+
+.training-answer-navigation {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.training-answer-navigation p {
+    font-size: 10pt;
+}
+
+.training-back-arrow,
+.training-forward-arrow {
+    fill: none;
+    stroke: white;
+    cursor: pointer;
+    width: 40px;
+}
+
+.training-back-arrow *,
+.training-forward-arrow *{
+    stroke-width: 3px;
+}
+
+.training-finished {
+    color: white;
+    text-align: center;
+    padding: 40px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.training-finished hr {
+    width: 100%;
+    margin: auto;
 }
 
 #training-external-instructions {

@@ -38,9 +38,12 @@ const TrainingMode = Object.freeze({
 
 const TrainingApp = () => {
     // Important App Member Variables
+    const [isFetching, setFetching] = useState(false)
+    const [answer, setAnswer] = useState('A')
+
     const [mode, setMode] = useState(TrainingMode.Start)
-    const [index, setIndex] = useState(0)
-    const[questions, addQuestion] = useState([])
+    const [offset, setOffset] = useState(0)
+    const [questions, addQuestion] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState({
         'prompt': '',
         'responseA': '',
@@ -52,16 +55,12 @@ const TrainingApp = () => {
     /**** CLICK LISTENERS *******/
     const startClick = () => {
         console.log("start click")
-
-        // Start Training
-        render(html`<${TrainingQuestion} clickListener=${questionListener} ...${currentQuestion} />`, mainElement)
+        setMode(TrainingMode.Question)
     }
 
     const questionListener = (event) => {
-        const answer = event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B';
-        console.log(answer == currentQuestion.answer);
-
-        render(html`<${TrainingAnswer} correct=${answer == currentQuestion.answer} reasonHTML=${currentQuestion.reason}/>`, mainElement);
+        setAnswer(event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B')
+        setMode(TrainingMode.Answer)
     }
 
     const backButtonListener = () => {
@@ -70,43 +69,64 @@ const TrainingApp = () => {
 
     const nextQuestionListener = () => {
         console.log('next question')
-        setIndex(index + 1)
+        console.log('offset', offset)
+        setOffset(prevOffset => {
+            console.log('changing')
+            return prevOffset + 1
+        })
     }
 
     const prevQuestionListener = () => {
         console.log('prev question')
-        setIndex(index - 1)
+        setOffset(prevOffset => prevOffset - 1)
     }
 
     /***** END OF CLICK LISTENERS ******/
 
-    console.log('current question: ', currentQuestion)
+    console.log('current question: ', offset, currentQuestion)
 
     // Fetch New Question or Get Old Question
     useEffect(() => {
-        console.log('Index changed: ', index)
+        console.log('Offset changed: ', offset)
 
         // For Old Question
-        if (index < questions.length) {
-            console.log(index, questions[index])
-            setCurrentQuestion(questions[index])
+        if (offset < questions.length) {
+            console.log(offset, questions[offset])
+            setCurrentQuestion(questions[offset])
+
+            // Change Mode
+            setMode(TrainingMode.Question)
         }
-        else {
+        else if(!isFetching) {
+            setFetching(true)
             // For New Question
-            trainingFetch(project, index)
+            trainingFetch(project, offset)
             .then((data) => {
                 console.log(data)
-                if (data?.prompt != '') {
+                if (data.length > 0) {
                     setCurrentQuestion(...data)
                     addQuestion(prev => {
                         console.log('previous: ', prev)
                         return [...prev, currentQuestion]
                     })
+                    // Change Mode
+                    setMode(TrainingMode.Question)
                 }
+                else {
+                    console.log('training finished')
+                    setMode(TrainingMode.Finished)
+                }
+                setFetching(false)
             })
-            .catch((error) => (console.error(error)))
+            .catch((error) => {
+                console.error(error)
+                setFetching(false)
+            })
         }
-    }, [index])
+        else {
+            console.log("Already fetching new question...")
+        }
+    }, [offset])
 
     // Change what is rendered
     useEffect(() => {
@@ -117,10 +137,38 @@ const TrainingApp = () => {
         return html`<${TrainingStartPage} listener=${startClick} />`
     }
     else if (mode == TrainingMode.Question) {
-
+        return html`
+            <${TrainingQuestion} 
+                clickListener=${questionListener} 
+                ...${currentQuestion}
+                backListener=${offset > 0 ? prevQuestionListener : null}
+                nextListener=${offset < questions.length ? nextQuestionListener : null}
+            />
+        `
     }
     else if (mode == TrainingMode.Answer) {
-
+        return html`
+            <${TrainingAnswer} 
+                correct=${answer == currentQuestion.answer} 
+                reasonHTML=${currentQuestion.reason}
+                backListener=${backButtonListener}
+                nextListener=${nextQuestionListener}
+            />
+        `
+    }
+    else if (mode == TrainingMode.Finished) {
+        return html`
+            <div class="training-finished">
+                <h1>Training Completed!</h1>
+                <hr></hr>
+                <p>Feel free to refresh and start over, or review your mistakes. If you feel confident that you are ready for the real thing, head back to the platform and begin working.</p>
+                <svg title="Go Back" onClick=${prevQuestionListener} viewBox="0 0 100 100" class="training-back-arrow">
+                        <line x1="27" y1="50" x2="57" y2="20" />
+                        <line x1="27" y1="50" x2="57" y2="80" />
+                        <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
+                </svg>
+            </div>
+        `
     }
 }
 
