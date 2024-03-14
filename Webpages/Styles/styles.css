@@ -469,17 +469,19 @@ hr {
     justify-content: center;
     padding: 10px 20px;
     color: white;
+    min-height: 40px;
 }
 
 .training-instructions h4 {
     order: 0;
-    position: sticky;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%)
 }
 
 .training-instructions > .training-back-arrow {
     order: -1;
+    position: sticky;
     margin-right: auto;
 }
 
@@ -511,6 +513,26 @@ hr {
 .training-back-arrow *,
 .training-forward-arrow *{
     stroke-width: 3px;
+}
+
+.training-back-arrow:hover,
+.training-forward-arrow:hover {
+    stroke: var(--primary-color);
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.training-back-arrow:hover > circle,
+.training-forward-arrow:hover > circle {
+    stroke-width: 0;
+}
+
+.training-back-arrow:active,
+.training-forward-arrow:active {
+    stroke: var(--primary-color);
+    background-color: #ffffffa0;
+    border-radius: 100%;
 }
 
 .training-finished {
