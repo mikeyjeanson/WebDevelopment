@@ -1,9 +1,9 @@
 import { html, render } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
-import TrainingStartPage from 'root/TrainingSxS/Components/trainingStartPage.js'
-import TrainingQuestion from 'root/TrainingSxS/Components/trainingQuestion.js'
-import TrainingAnswer from 'root/TrainingSxS/Components/trainingAnswer.js'
-import trainingFetch from 'root/TrainingSxS/Components/trainingFetch.js'
+import TrainingStartPage from 'root/OfflineTraining/Components/trainingStartPage.js'
+import TrainingQuestion from 'root/OfflineTraining/Components/trainingQuestion.js'
+import TrainingAnswer from 'root/OfflineTraining/Components/trainingAnswer.js'
+import trainingFetch from 'root/OfflineTraining/Components/trainingFetch.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
