@@ -1,18 +1,63 @@
-import { html, render } from 'htm/preact';
-import TrainingAnswer from './trainingAnswer.js';
+import { html } from 'htm/preact';
+import { useState, useEffect } from 'preact/hooks'
 
-const TrainingQuestion = ({ clickListener, prompt, responseA, responseB, backListener, nextListener }) => {
+const TrainingQuestion = ({ questionAnsweredCallback, prompt, responseA, responseB, backListener, nextListener }) => {
+    const [answer, setAnswer] = useState('')
+    const [timeDown, setTimeDown] = useState(Date.now())
+
+    const selectAnswer = (event) => {
+        // Do nothing if the target was a link
+        const tagName = event?.target.tagName.toLowerCase()
+        if (tagName == 'a' || tagName == 'button') return
+    
+        const selectedAnswer = event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B'
+
+        // Get the parent elements of the training responses
+        const elementA = document.getElementById('training-response-a')?.parentElement;
+        const elementB = document.getElementById('training-response-b')?.parentElement;
+
+        // Add effects based on answer
+        if (elementA && elementB) {
+            if (selectedAnswer === 'A') {
+                elementA.classList.remove('mute-effect');
+                elementA.classList.add('select-effect');
+                elementB.classList.remove('select-effect');
+                elementB.classList.add('mute-effect');
+            } else {
+                elementB.classList.remove('mute-effect');
+                elementB.classList.add('select-effect');
+                elementA.classList.remove('select-effect');
+                elementA.classList.add('mute-effect');
+            }
+        }
+
+        setAnswer(selectedAnswer);
+    }
+
+    const handleDown = (event) => {
+        setTimeDown(Date.now())
+    }
+
+    const handleUp = (event) =>  {
+        if (Date.now() - timeDown < 150) {
+            selectAnswer(event)
+        }
+    }
+
+    const checkAnswer = () => {
+        questionAnsweredCallback(answer)
+    }
 
     return html`
         <div class="training-prompt">
             <p><strong>Prompt: </strong><span id="training-prompt-prompt" innerHTML=${prompt}></span></p>
         </div>
         <div class="training-respsonses-holder">
-            <div class="training-response" onClick=${clickListener}>
+            <div class="training-response" onMouseDown=${handleDown} onMouseUp=${handleUp}>
                 <h3>Response A</h3>
                 <div id="training-response-a" innerHTML=${responseA}></div>                           
             </div>
-            <div class="training-response" onClick=${clickListener}>
+            <div class="training-response" onMouseDown=${handleDown} onMouseUp=${handleUp}>
                 <h3>Response B</h3>
                 <div id="training-response-b" innerHTML=${responseB}></div>                            
             </div>
@@ -27,7 +72,15 @@ const TrainingQuestion = ({ clickListener, prompt, responseA, responseB, backLis
                     <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
                 </svg>
             ` : ''}
-            ${nextListener ? 
+            ${answer != '' ? 
+            html`
+                <svg title="Next Question" onClick=${checkAnswer} viewBox="0 0 100 100" class="training-forward-arrow">
+                    <line x1="73" y1="50" x2="43" y2="20" />
+                    <line x1="73" y1="50" x2="43" y2="80" />
+                    <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
+                </svg>
+            ` : ''}
+            ${answer == '' && nextListener ? 
             html`
                 <svg title="Next Question" onClick=${nextListener} viewBox="0 0 100 100" class="training-forward-arrow">
                     <line x1="73" y1="50" x2="43" y2="20" />
