@@ -418,6 +418,11 @@ hr {
     background-color: var(--dark-primary-color);
 }
 
+.training-prompt,
+.training-response {
+    line-height: 22px;
+}
+
 .training-response {
     flex: 1;
     width: 100px;
@@ -428,21 +433,30 @@ hr {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12);
 }
 
-.training-respose > p code {
-    background-color: #e3e3e3;
-    color: var(--primary-color)
+.training-response * > code,
+.training-prompt * > code {
+    background-color: #efefef;
+    color: var(--primary-color);
+    font-size: 11pt;
+    padding: 0 2px;
 }
 
 /* Increase font size for code snippets */
 .training-response pre[class*="language-"],
-.training-prompt pre[class*="language-"] {
-    font-size: 10pt;
-}
-
-/* Increase font size for inline code */
-.training-response code[class*="language-"] ,
+.training-prompt pre[class*="language-"],
+.training-response code[class*="language-"],
 .training-prompt code[class*="language-"] {
     font-size: 10pt;
+    color: #434343;
+    cursor: default;
+}
+
+.training-response pre[class*="language-"] > code,
+.training-prompt pre[class*="language-"] > code,
+.training-response code[class*="language-"] > code,
+.training-prompt code[class*="language-"] > code {
+    font-size: 10pt;
+    background-color: transparent;
 }
 
 .training-response > * {
