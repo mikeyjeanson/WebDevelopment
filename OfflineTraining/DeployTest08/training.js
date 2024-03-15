@@ -70,11 +70,8 @@ const TrainingApp = () => {
         setOffset(0)
     }
 
-    const questionListener = (event) => {
-        // Do nothing if the target was a link
-        if (event.target.tagName.toLowerCase() == 'a') return
-    
-        setAnswer(event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B');
+    const questionAnswered = (selectedAnswer) => {
+        setAnswer(selectedAnswer)
         setMode(TrainingMode.Answer);
     }
 
@@ -142,7 +139,7 @@ const TrainingApp = () => {
     else if (mode == TrainingMode.Question) {
         return html`
             <${TrainingQuestion} 
-                clickListener=${questionListener} 
+                questionAnsweredCallback=${questionAnswered} 
                 ...${currentQuestion}
                 backListener=${offset > 0 ? prevQuestionListener : null}
                 nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
