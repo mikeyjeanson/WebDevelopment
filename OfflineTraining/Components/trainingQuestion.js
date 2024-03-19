@@ -5,6 +5,11 @@ const TrainingQuestion = ({ questionAnsweredCallback, prompt, responseA, respons
     const [answer, setAnswer] = useState('')
     const [timeDown, setTimeDown] = useState(Date.now())
 
+    // Deselect Answer
+    useEffect(() => {
+        setAnswer('')
+    }, [prompt])
+
     const selectAnswer = (event) => {
         // Do nothing if the target was a link
         const tagName = event?.target.tagName.toLowerCase()
@@ -12,34 +17,40 @@ const TrainingQuestion = ({ questionAnsweredCallback, prompt, responseA, respons
     
         const selectedAnswer = event.currentTarget.querySelector('#training-response-a') ? 'A' : 'B'
 
-        // Get the parent elements of the training responses
+        setAnswer(selectedAnswer);
+    }
+
+    // Highlight and Mute
+    useEffect(() => {
+        // Get the parent elements of the training responses (class='training-response')
         const elementA = document.getElementById('training-response-a')?.parentElement;
         const elementB = document.getElementById('training-response-b')?.parentElement;
 
-        // Add effects based on answer
         if (elementA && elementB) {
-            if (selectedAnswer === 'A') {
+            if (answer === 'A') {
                 elementA.classList.remove('mute-effect');
                 elementA.classList.add('select-effect');
                 elementB.classList.remove('select-effect');
                 elementB.classList.add('mute-effect');
-            } else {
+            } else if(answer === 'B' ) {
                 elementB.classList.remove('mute-effect');
                 elementB.classList.add('select-effect');
                 elementA.classList.remove('select-effect');
                 elementA.classList.add('mute-effect');
             }
+            else {
+                elementA.classList.remove('mute-effect', 'select-effect')
+                elementB.classList.remove('mute-effect', 'select-effect')
+            }
         }
-
-        setAnswer(selectedAnswer);
-    }
+    }, [answer])
 
     const handleDown = (event) => {
         setTimeDown(Date.now())
     }
 
     const handleUp = (event) =>  {
-        if (Date.now() - timeDown < 150) {
+        if (Date.now() - timeDown < 250) {
             selectAnswer(event)
         }
     }

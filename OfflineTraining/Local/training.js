@@ -4,6 +4,7 @@ import TrainingStartPage from '../Components/trainingStartPage.js'
 import TrainingQuestion from '../Components/trainingQuestion.js'
 import TrainingAnswer from '../Components/trainingAnswer.js'
 import trainingFetch from '../Components/trainingFetch.js'
+import TrainingFinished from '../Components/trainingFinished.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
@@ -15,7 +16,6 @@ for (const s of scripts) {
     const scriptURL = new URL(s.src);
     if (scriptURL.href === moduleURL.href) {
         script = s;
-        console.log("Script found:", script)
         break;
     }
 }
@@ -93,7 +93,6 @@ const TrainingApp = () => {
     useEffect(() => {
         // For Old Question
         if (offset < questions.length && !isFetching) {
-            console.log(offset, questions[offset])
             setCurrentQuestion(questions[offset])
             setMode(TrainingMode.Question)
         }
@@ -102,11 +101,9 @@ const TrainingApp = () => {
             // For New Question
             trainingFetch(project, offset)
             .then((data) => {
-                console.log(data)
                 if (data.length > 0) {
                     setCurrentQuestion(...data)
                     addQuestion(prev => {
-                        console.log('previous: ', prev)
                         return [...prev, ...data]
                     })
                     setMode(TrainingMode.Question)
@@ -121,16 +118,11 @@ const TrainingApp = () => {
                 setFetching(false)
             })
         }
-        else {
-            console.log("Already fetching new question...")
-        }
     }, [offset])
 
     useEffect(() => {
         // highlight possible code syntax
-        console.log('highlighting...')
         Prism.highlightAll();
-        console.log('done highlighting...')
     }, [mode, currentQuestion]);
 
     if (mode == TrainingMode.Start) {
@@ -157,18 +149,7 @@ const TrainingApp = () => {
         `
     }
     else if (mode == TrainingMode.Finished) {
-        return html`
-            <div class="training-finished">
-                <h1>Training Completed!</h1>
-                <hr></hr>
-                <p>Feel free to refresh and start over, or review your mistakes. If you feel confident that you are ready for the real thing, head back to the platform and begin working.</p>
-                <svg title="Go Back" onClick=${prevQuestionListener} viewBox="0 0 100 100" class="training-back-arrow">
-                        <line x1="27" y1="50" x2="57" y2="20" />
-                        <line x1="27" y1="50" x2="57" y2="80" />
-                        <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
-                </svg>
-            </div>
-        `
+        return html`<${TrainingFinished}  prevQuestionListener=${prevQuestionListener} />`
     }
 }
 

@@ -441,13 +441,21 @@ hr {
     padding: 0 2px;
 }
 
-/* Increase font size for code snippets */
 .training-response pre[class*="language-"],
 .training-prompt pre[class*="language-"],
 .training-response code[class*="language-"],
 .training-prompt code[class*="language-"] {
     font-size: 10pt;
     color: #434343;
+    cursor: default;
+}
+
+.training-response pre[class*="lang-"],
+.training-prompt pre[class*="lang-"],
+.training-response code[class*="lang-"],
+.training-prompt code[class*="lang-"] {
+    font-size: 10pt;
+    color: red;
     cursor: default;
 }
 

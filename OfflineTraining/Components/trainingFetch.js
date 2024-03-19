@@ -12,7 +12,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
     */
     
     // Query construction and URL generation
-    const query = `Select B,C,D,E,F LIMIT 1 OFFSET ${offset}`;
+    const query = `Select * LIMIT 1 OFFSET ${offset}`;
     const encodedQuery = encodeURIComponent(query);
     const url = `${base}sheet=${sheetName}&tq=${encodedQuery}`;
 
@@ -20,15 +20,12 @@ export default async function trainingFetch(sheetName, offset= 0) {
     const data = [];
 
     return new Promise((resolve, reject) => {
-        console.log('Fetching data from Google Sheet...');
-
         // Fetch data from Google Sheet API
         fetch(url)
             .then(res => res.   text())
             .then(response => {
                 // Parse JSON response and extract data
                 const jsonData = JSON.parse(response.substring(47).slice(0, -2));
-                console.log(jsonData)
 
                 // Process data: extract labels (column names) and rows
                 const labels = [];
@@ -51,12 +48,11 @@ export default async function trainingFetch(sheetName, offset= 0) {
                     data.push(rowObject)
                 });
 
-                console.log('fetchSheet: Data fetched successfully:', data)
                     
                 resolve(data);
             })
             .catch(error => {
-                console.error('fetchSheet: Error fetching data:', error);
+                console.error('Error fetching data:', error);
                 reject(error);
             });   
     })
