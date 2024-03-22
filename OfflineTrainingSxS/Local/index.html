@@ -18,10 +18,11 @@
     </style> <!--End Page Colors-->
     <!--Prism Style-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism-themes@master/themes/prism-one-light.css">
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
-    <!--OTHER LANGUANGES NOT INCLUDED IN BASIC-->
-    <script src="https://prismjs.com/components/prism-java.min.js"></script>
-    <script src="https://prismjs.com/components/prism-clike.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.15.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.15.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        Prism.plugins.autoloader.languages_path = 'https://unpkg.com/prismjs@1.15.0/components/'
+    </script>
     <!--Link Style Sheet-->
     <link 
         href="../DeployTest08/deploy.css" 

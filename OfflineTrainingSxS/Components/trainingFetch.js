@@ -12,7 +12,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
     */
     
     // Query construction and URL generation
-    const query = `Select * LIMIT 1 OFFSET ${offset}`;
+    const query = `Select * ORDER BY A desc LIMIT 1 OFFSET ${offset}`;
     const encodedQuery = encodeURIComponent(query);
     const url = `${base}sheet=${sheetName}&tq=${encodedQuery}`;
 
