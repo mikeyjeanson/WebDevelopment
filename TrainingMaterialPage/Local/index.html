@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Define Page Colors-->
+    <style>
+        :root {
+            --primary-color: #247d78;
+            --dark-primary-color: #1b5e5a;
+            --opaque-primary-color: #247d7814;
+            --header-title-color: #ffffff;
+            --header-description-color: #f3f3f3;
+            --odd-color: #ffffff;
+            --even-color: #f1f1f1;
+            --description-color: #434343;
+        }
+    </style> <!--End Page Colors-->
+    <!--Link Style Sheet-->
+    <link 
+        href="../styles.css" 
+        rel="stylesheet"
+    />
+    <!--Import Map-->
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+          }
+        }
+    </script>
+    <!--End of Import Map-->
+    <!--Project Specific-->
+    <!--End Project Specific-->
+    <title>Training Material for Vanilla</title>
+</head>
+<body>
+    <main class="content-main">
+        <div class="training-material-header">
+            <img
+                src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/people-business-training.jpg"
+                alt="Buisness people going through a training exercise."
+            />
+            <div>
+                <h1>Training Material for Vanilla</h1>
+                <p>Before tasking, give yourself time to understand the instructions. Failure to follow instructions will result in removal from the project.</p>
+                <button 
+                    id="go-to-offline-training"
+                >Offline Training</button>
+            </div>
+            
+        </div>
+        <div id="training-material-container">
+            <!--Guide Cards-->
+            <div class="guide-card"> <!--Instructions Card-->
+                <img
+                    class="guide-card-img" 
+                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/analysis-3681353.jpg"
+                />    
+                <h3 class="guide-card-name">Instructions</h3>
+                <a 
+                    class="guide-card-link"
+                    href="https://docs.google.com/document/d/1rSrcuSg-m0g997-5TaXKtTNFBFxAjiHliWgUov3PJcs/view"
+                    hidden>
+                </a>
+            </div><!--End of Card-->
+            <!--End of Guide Cards-->
+        </div>
+    </main>
+    <footer class="bulba-footer">
+        <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
+        <p>Please fill out <a href="https://forms.gle/iTwQG76LK57joHzw8">this form</a> to improve the site.</p>
+    </footer>
+    <script>
+        // Get all elements with the class "guide-card"
+        var guideCards = document.querySelectorAll('.guide-card');
+
+        // Loop through each guide card
+        guideCards.forEach(function(card) {
+            // Add click event listener to each guide card
+            card.addEventListener('click', function() {
+                // Find the hidden link within the clicked guide card
+                var link = card.querySelector('.guide-card-link');
+                // Get the href attribute value of the link
+                var href = link.getAttribute('href');
+                // Open the link in a new tab
+                window.open(href, '_blank');
+            });
+        });
+
+        document.getElementById('go-to-offline-training')?.addEventListener('click', () => {
+            console.log('Hello World')
+        })
+    </script>
+</body>
+</html>
