@@ -337,13 +337,12 @@ hr {
 
 .guide-card-img {
     flex: 1 1 200px;
-    width: 100%;
+    max-width: 100%;
     object-fit: cover;
-    aspect-ratio: 4/3;
 }
 
 .guide-card-name {
-    flex: 0;
+    flex: 1;
     background-color: rgba(255,255,255, 0.3);
     color: var(--primary-color);
     width: 100%;
@@ -352,104 +351,6 @@ hr {
 
 .guide-card a {
     text-decoration: none;
-}
-
-/* Report Issues */
-
-#report-issues-container {
-    display: flex;
-    flex-wrap: wrap;
-    place-content: center;
-    margin: 30px 12vw;
-}
-
-.report-issues-header {
-    padding: 20px 12vw;
-    text-align: center;
-}
-
-@media only screen and (max-width: 600px) {
-    .report-issues-header > img {
-        display: none;
-    }
-}
-
-.report-issues-header h1 {
-    color: var(--primary-color);
-    font-size: 34pt;
-    font-weight: 300;
-    margin-bottom: 10px;
-}
-
-.report-issues-header p {
-    color: var(--primary-color);
-    font-size: 11pt;
-    line-height: 23px;
-}
-
-/* Training Material */
-
-#training-material-container {
-    display: flex;
-    flex-wrap: wrap;
-    place-content: center;
-    margin: 30px 12vw;
-}
-
-.training-material-header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: stretch;
-    background-color: var(--primary-color);
-    padding: 20px 12vw;
-}
-
-@media only screen and (max-width: 600px) {
-    .training-material-header > img {
-        display: none;
-    }
-}
-
-.training-material-header > * {
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
-.training-material-header > img {
-    width: 200px;
-    flex: 1 1 200px;
-    object-fit: cover;
-}
-
-.training-material-header > div {
-    flex: 1 1 400px;
-    display: flex;
-    flex-direction: column;
-}
-
-.training-material-header h1 {
-    color: white;
-    font-size: 34pt;
-    font-weight: 300;
-    margin-bottom: 10px;
-}
-
-.training-material-header p {
-    color: white;
-    font-size: 11pt;
-    line-height: 23px;
-}
-
-.training-material-header button {
-    background-color: white;
-    border: solid white 2px;
-    width: 100%;
-    margin-top: auto;
-}
-
-.training-material-header button:hover {
-    background-color: #ffffffa0;
 }
 
 /* Side by Side Training */

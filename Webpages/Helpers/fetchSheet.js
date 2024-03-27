@@ -21,15 +21,12 @@ export default async function fetchSheet(sheetID, sheetName, offset = 0, limit =
     const data = [];
 
     return new Promise((resolve, reject) => {
-        console.log('Fetching data from Google Sheet...');
-
         // Fetch data from Google Sheet API
         fetch(url)
             .then(res => res.   text())
             .then(response => {
                 // Parse JSON response and extract data
                 const jsonData = JSON.parse(response.substring(47).slice(0, -2));
-                console.log(jsonData)
 
                 // Process data: extract labels (column names) and rows
                 const labels = [];
@@ -52,8 +49,6 @@ export default async function fetchSheet(sheetID, sheetName, offset = 0, limit =
                     data.push(rowObject)
                 });
 
-                console.log('fetchSheet: Data fetched successfully:', data)
-                    
                 resolve(data);
             })
             .catch(error => {
