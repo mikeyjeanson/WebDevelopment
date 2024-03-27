@@ -49,6 +49,7 @@
                 <button 
                     id="go-to-offline-training"
                     hidden
+                    href=""
                 >Offline Training</button>
             </div>
             
@@ -64,6 +65,30 @@
                 <a 
                     class="guide-card-link"
                     href="https://docs.google.com/document/d/1rSrcuSg-m0g997-5TaXKtTNFBFxAjiHliWgUov3PJcs/view"
+                    hidden>
+                </a>
+            </div><!--End of Card-->
+            <div class="guide-card"> <!--Announcements Card-->
+                <img
+                    class="guide-card-img" 
+                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/announcements-image.jpg"
+                />    
+                <h3 class="guide-card-name">Recent Announcements</h3>
+                <a 
+                    class="guide-card-link"
+                    href="../Announcments"
+                    hidden>
+                </a>
+            </div><!--End of Card-->
+            <div class="guide-card"> <!--Tips Card-->
+                <img
+                    class="guide-card-img" 
+                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/tips-image.jpg"
+                />    
+                <h3 class="guide-card-name">Recent Tips</h3>
+                <a 
+                    class="guide-card-link"
+                    href="/Tips"
                     hidden>
                 </a>
             </div><!--End of Card-->
@@ -86,14 +111,26 @@
                 var link = card.querySelector('.guide-card-link');
                 // Get the href attribute value of the link
                 var href = link.getAttribute('href');
+
+                // check if it contains "https://" at the start of the link, True if yes
+                const external = href.startsWith('https://');
+                
                 // Open the link in a new tab
-                window.open(href, '_blank');
+                if (external) {
+                    window.open(href, '_blank');
+                } else {
+                    window.location.href = href;
+                }
             });
         });
 
         document.getElementById('go-to-offline-training')?.addEventListener('click', () => {
-            console.log('Hello World')
-        })
+            // Get the href attribute value of the link
+            var href = link.getAttribute('href');
+
+            // Navigate to the online training link
+            window.location.href = href;
+        });
     </script>
 </body>
 </html>
