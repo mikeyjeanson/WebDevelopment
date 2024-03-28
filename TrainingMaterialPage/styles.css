@@ -312,13 +312,6 @@ hr {
 
 /* Help Guides */
 
-#training-material-container {
-    display: flex;
-    flex-wrap: wrap;
-    place-content: center;
-    margin: 30px 12vw;
-}
-
 #help-guide-container {
     display: flex;
     flex-wrap: wrap;
@@ -336,6 +329,7 @@ hr {
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     margin: 10px;
+    background-color: white;
 }
 
 .guide-card:hover {
@@ -351,7 +345,6 @@ hr {
 
 .guide-card-name {
     flex: 0;
-    background-color: rgba(255,255,255, 0.3);
     color: var(--primary-color);
     width: 100%;
     text-align: center;
@@ -361,7 +354,47 @@ hr {
     text-decoration: none;
 }
 
+/* Report Issues */
+
+#report-issues-container {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    margin: 30px 12vw;
+}
+
+.report-issues-header {
+    padding: 20px 12vw;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .report-issues-header > img {
+        display: none;
+    }
+}
+
+.report-issues-header h1 {
+    color: var(--primary-color);
+    font-size: 34pt;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.report-issues-header p {
+    color: var(--primary-color);
+    font-size: 11pt;
+    line-height: 23px;
+}
+
 /* Training Material */
+
+#training-material-container {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    margin: 30px 12vw;
+}
 
 .training-material-header {
     display: flex;
@@ -386,7 +419,7 @@ hr {
 .training-material-header > img {
     width: 200px;
     flex: 1 1 200px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .training-material-header > div {

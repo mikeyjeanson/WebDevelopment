@@ -419,7 +419,7 @@ hr {
 .training-material-header > img {
     width: 200px;
     flex: 1 1 200px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .training-material-header > div {

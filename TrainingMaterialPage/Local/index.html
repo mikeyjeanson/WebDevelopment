@@ -21,19 +21,6 @@
         href="../styles.css" 
         rel="stylesheet"
     />
-    <!--Import Map-->
-    <script type="importmap">
-        {
-          "imports": {
-            "preact": "https://esm.sh/preact@10.19.2",
-            "preact/": "https://esm.sh/preact@10.19.2/",
-            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
-          }
-        }
-    </script>
-    <!--End of Import Map-->
-    <!--Project Specific-->
-    <!--End Project Specific-->
     <title>Training Material for Vanilla</title>
 </head>
 <body>
@@ -59,12 +46,13 @@
             <div class="guide-card"> <!--Instructions Card-->
                 <img
                     class="guide-card-img" 
-                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/analysis-3681353.jpg"
+                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/people-starting-business-project_52683-56853.jpg"
                 />    
                 <h3 class="guide-card-name">Instructions</h3>
                 <a 
                     class="guide-card-link"
                     href="https://docs.google.com/document/d/1rSrcuSg-m0g997-5TaXKtTNFBFxAjiHliWgUov3PJcs/view"
+                    external
                     hidden>
                 </a>
             </div><!--End of Card-->
@@ -76,7 +64,7 @@
                 <h3 class="guide-card-name">Recent Announcements</h3>
                 <a 
                     class="guide-card-link"
-                    href="../Announcments"
+                    href="https://sites.google.com/scale.com/bulba-help-center/ice/vanilla/announcements-ice-vanilla"
                     hidden>
                 </a>
             </div><!--End of Card-->
@@ -88,7 +76,31 @@
                 <h3 class="guide-card-name">Recent Tips</h3>
                 <a 
                     class="guide-card-link"
-                    href="/Tips"
+                    href="https://sites.google.com/scale.com/bulba-help-center/ice/vanilla/tips-ice-vanilla-embed"
+                    hidden>
+                </a>
+            </div><!--End of Card-->
+            <div class="guide-card"> <!--FAQ Card-->
+                <img
+                    class="guide-card-img" 
+                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/flat-frequently-asked-questions-background_23-2148167866.jpg"
+                />    
+                <h3 class="guide-card-name">FAQs</h3>
+                <a 
+                    class="guide-card-link"
+                    href="https://docs.google.com/document/d/1J30VxxsKGnOf6D747hnmKQDqkLr672O0VAi4suXIPlg/view"
+                    hidden>
+                </a>
+            </div><!--End of Card-->
+            <div class="guide-card"> <!--Classic Instructions Card-->
+                <img
+                    class="guide-card-img" 
+                    src="https://cdn.jsdelivr.net/gh/mikeyjeanson/WebDevelopment@main/Images/analysis-3681353.jpg"
+                />    
+                <h3 class="guide-card-name">Classic Instructions</h3>
+                <a 
+                    class="guide-card-link"
+                    href="https://docs.google.com/document/d/e/2PACX-1vQ2VciYtdNizaMpM_ZdpZhnyrU19rWQfbfaMNxEjMYgAf3wzHoGMRPwD240FdMUiCiXXThoRq81MpUc/pub"
                     hidden>
                 </a>
             </div><!--End of Card-->
@@ -109,17 +121,18 @@
             card.addEventListener('click', function() {
                 // Find the hidden link within the clicked guide card
                 var link = card.querySelector('.guide-card-link');
+                
                 // Get the href attribute value of the link
                 var href = link.getAttribute('href');
 
                 // check if it contains "https://" at the start of the link, True if yes
-                const external = href.startsWith('https://');
+                const external = link.hasAttribute('external')
                 
                 // Open the link in a new tab
                 if (external) {
                     window.open(href, '_blank');
                 } else {
-                    window.location.href = href;
+                    window.open(href);
                 }
             });
         });
@@ -129,7 +142,7 @@
             var href = link.getAttribute('href');
 
             // Navigate to the online training link
-            window.location.href = href;
+            window.open(href);
         });
     </script>
 </body>
