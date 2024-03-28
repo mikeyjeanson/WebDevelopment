@@ -329,6 +329,7 @@ hr {
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     margin: 10px;
+    background-color: white;
 }
 
 .guide-card:hover {
@@ -344,7 +345,6 @@ hr {
 
 .guide-card-name {
     flex: 0;
-    background-color: rgba(255,255,255, 0.3);
     color: var(--primary-color);
     width: 100%;
     text-align: center;
