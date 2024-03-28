@@ -17,7 +17,7 @@ for (const s of scripts) {
 }
 
 let offset = 0
-const limit = 2
+const limit = 4
 const sheetName = script?.getAttribute('sheetName') || '';
 const query = script?.getAttribute('query') || '';
 
