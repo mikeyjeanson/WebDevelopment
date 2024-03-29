@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Define Page Colors-->
+    <style>
+        :root {
+            --primary-color: #247d78;
+            --dark-primary-color: #1b5e5a;
+            --opaque-primary-color: #247d7814;
+            --header-title-color: #ffffff;
+            --header-description-color: #f3f3f3;
+            --odd-color: #ffffff;
+            --even-color: #f1f1f1;
+            --description-color: #434343;
+        }
+    </style> <!--End Page Colors-->
+    <!--Prism Style-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism-themes@master/themes/prism-one-light.css">
+    <script src="https://unpkg.com/prismjs@1.15.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.15.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        Prism.plugins.autoloader.languages_path = 'https://unpkg.com/prismjs@1.15.0/components/'
+    </script>
+    <!--Link Style Sheet-->
+    <link 
+        href="../Deploy/deploy.css" 
+        rel="stylesheet"
+    />
+    <!--Import Map-->
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+          }
+        }
+    </script>
+    <!--End of Import Map-->
+    <title>Offline Training</title>
+</head>
+<body>
+    <main class="content-main">
+        <div class="training-header">
+            <h1 class="training-header-title">Code Eval Offline Training</h1>
+        </div>
+        <div class="training-body">
+            <div id="training-main">
+            </div>
+            <button 
+                id="training-external-instructions" 
+                href="https://docs.google.com/document/d/12aV7yxMLjnwbyaCpJTkgVBulEmQX2nEsydAk0cTw_GU/edit" 
+                target="_blank">
+                Code Eval Instructions
+            </button>
+        </div>
+    </main>
+    <footer class="bulba-footer">
+        <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
+        <p>Please fill out <a href="https://forms.gle/iTwQG76LK57joHzw8">this form</a> to improve the site.</p>
+    </footer>
+    <script
+        src="./training.js"
+        type="module"
+        project="Bulba: Code Eval"
+    ></script>
+</body>
+</html>
