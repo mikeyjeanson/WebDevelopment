@@ -1,3 +1,5 @@
+const debug = true
+
 export default async function trainingFetch(sheetName, offset= 0) {
     // Spreadsheet and sheet configuration
     const sheetID = '11UXP8NGI4UCURwC9l5N8CszsLdWUj3xXCbPSf7psIUo';
@@ -18,6 +20,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
 
     // Data storage and initialization
     const data = [];
+    if (debug) console.log(query, encodedQuery, url)
 
     return new Promise((resolve, reject) => {
         // Fetch data from Google Sheet API
@@ -26,6 +29,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
             .then(response => {
                 // Parse JSON response and extract data
                 const jsonData = JSON.parse(response.substring(47).slice(0, -2));
+                if (debug) console.log(jsonData)
 
                 // Process data: extract labels (column names) and rows
                 const labels = [];
@@ -38,6 +42,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
                         labels.push(cleanLabel);
                     }
                 });
+                if (debug) console.log('lables', labels)
 
                 // Create data objects from each row
                 jsonData.table.rows.forEach(row => {
@@ -47,12 +52,12 @@ export default async function trainingFetch(sheetName, offset= 0) {
                     });
                     data.push(rowObject)
                 });
+                if (debug) console.log(data)
 
-                    
                 resolve(data);
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
+                if (debug) console.error('Error fetching data:', error);
                 reject(error);
             });   
     })

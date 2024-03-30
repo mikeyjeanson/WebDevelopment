@@ -624,7 +624,7 @@ hr {
     flex-direction: column;
 }
 
-.trainging-multiple-choice-answers {
+.training-multiple-choice-answers {
     display: flex;
     margin: 0 auto 20px;
     flex-direction: column;
@@ -644,6 +644,10 @@ hr {
     font-size: 12pt;
 }
 
+.training-multiple-choice-answer:hover {
+    cursor: pointer;
+}
+
 .training-multiple-choice-bubble {
     width: 16px;
     height: 16px;
@@ -654,22 +658,18 @@ hr {
     display: flex;
 }
 
-.training-multiple-choice-bubble:hover {
-    cursor: pointer;
-}
-
-.training-bubble-fill {
+.bubble-fill {
     width: 12px;
     height: 12px;
-    border-radius: inherit;
+    border-radius: 100%;
     margin: auto;
 }
 
-.training-multiple-choice-bubble.bubble-selected-effect {
+.training-multiple-choice-answer.bubble-selected-effect > .training-multiple-choice-bubble {
     border-color: var(--primary-color);
 }
 
-.training-bubble-fill.bubble-selected-effect {
+.training-multiple-choice-answer.bubble-selected-effect > * > * {
     background-color: var(--primary-color);
 }
 

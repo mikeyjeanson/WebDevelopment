@@ -130,15 +130,26 @@ const TrainingApp = () => {
         return html`<${TrainingStartPage} listener=${startClick} />`
     }
     else if (mode == TrainingMode.Question) {
-        // return html`
-        //     <${TrainingQuestion} 
-        //         questionAnsweredCallback=${questionAnswered} 
-        //         ...${currentQuestion}
-        //         backListener=${offset > 0 ? prevQuestionListener : null}
-        //         nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
-        //     />
-        // `
-        return html`<${MultipleChoice}/>`
+        switch(currentQuestion.questionType) {
+            case 'Side by Side':
+                return html`
+                    <${sideBySideQuestion} 
+                        questionAnsweredCallback=${questionAnswered} 
+                        ...${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
+                    />
+                `
+            case 'Multiple Choice':
+                return html`
+                    <${MultipleChoice}
+                        currentQuestion=${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        questionAnsweredCallback=${questionAnswered}
+                        nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
+                    />
+                `
+        }        
     }
     else if (mode == TrainingMode.Answer) {
         return html`
