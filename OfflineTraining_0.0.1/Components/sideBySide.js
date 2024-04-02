@@ -1,9 +1,11 @@
 import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/hooks'
 
-const sideBySideQuestion = ({ questionAnsweredCallback, prompt, responseA, responseB, backListener, nextListener }) => {
+const SideBySide = ({ questionAnsweredCallback, prompt, answerA, answerB, backListener, nextListener }) => {
     const [answer, setAnswer] = useState('')
     const [timeDown, setTimeDown] = useState(Date.now())
+
+    console.log(questionAnsweredCallback, prompt, answerA, answerB, backListener, nextListener)
 
     // Deselect Answer
     useEffect(() => {
@@ -60,17 +62,17 @@ const sideBySideQuestion = ({ questionAnsweredCallback, prompt, responseA, respo
     }
 
     return html`
-        <div class="training-prompt">
+        <div class="training-question">
             <p><strong>Prompt: </strong><span id="training-prompt-prompt" innerHTML=${prompt}></span></p>
         </div>
-        <div class="training-respsonses-holder">
+        <div class="training-responses-holder">
             <div class="training-response" onMouseDown=${handleDown} onMouseUp=${handleUp}>
                 <h3>Response A</h3>
-                <div id="training-response-a" innerHTML=${responseA}></div>                           
+                <div id="training-response-a" innerHTML=${answerA}></div>                           
             </div>
             <div class="training-response" onMouseDown=${handleDown} onMouseUp=${handleUp}>
                 <h3>Response B</h3>
-                <div id="training-response-b" innerHTML=${responseB}></div>                            
+                <div id="training-response-b" innerHTML=${answerB}></div>                            
             </div>
         </div>
         <div class="training-instructions">
@@ -102,4 +104,4 @@ const sideBySideQuestion = ({ questionAnsweredCallback, prompt, responseA, respo
         </div>
     `;
 };
-export default sideBySideQuestion
+export default SideBySide

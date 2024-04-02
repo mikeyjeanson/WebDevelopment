@@ -543,11 +543,14 @@ hr {
 }
 
 .training-question > * {
+    max-width: 100%;
     margin: 4px; 
 }
 
-.training-question h3 {
-    color: var(--primary-color);
+.training-question h1 h2 h3 h4,
+.training-question > p > strong { 
+    /* Question Headers */
+    color: var(--primary-color); 
 }
 
 .training-question p {
@@ -626,22 +629,24 @@ hr {
 
 .training-multiple-choice-answers {
     display: flex;
-    margin: 0 auto 20px;
+    margin: 0 auto;
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     justify-content: space-evenly;
     border-radius: inherit;
-    padding: 10px;
+    padding: 10px 20px;
     min-width: 400px;
-    width: fit-content;
-    background-color: white;
+    max-width: 900px;
+    background-color: var(--dark-primary-color);
 }
 
 .training-multiple-choice-answer {
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    font-size: 12pt;
+    padding: 10px 10px 0;
+    font-size: 13pt;
+    margin-bottom: 10px;
+    color: white;
 }
 
 .training-multiple-choice-answer:hover {
@@ -649,28 +654,49 @@ hr {
 }
 
 .training-multiple-choice-bubble {
+    flex-shrink: 0;
     width: 16px;
     height: 16px;
     border-radius: 100%;
     border: solid #cfcfcf;
     background-color: #efefef;
-    margin-right: 8px;
+    margin-right: 12px;
     display: flex;
 }
 
 .bubble-fill {
+    flex-shrink: 0;
     width: 12px;
     height: 12px;
     border-radius: 100%;
     margin: auto;
 }
 
-.training-multiple-choice-answer.bubble-selected-effect > .training-multiple-choice-bubble {
-    border-color: var(--primary-color);
+.training-multiple-choice-answer.bubble-selected-effect > .training-multiple-choice-bubble > .bubble-fill {
+    background-color: var(--primary-color);
 }
 
-.training-multiple-choice-answer.bubble-selected-effect > * > * {
-    background-color: var(--primary-color);
+.training-multiple-choice-answer-actual * {
+    margin: 0;
+    padding: 0;
+}
+
+.training-multiple-choice-answer-actual pre[class*="language-"],
+.training-multiple-choice-answer-actual code[class*="language-"] {
+    font-size: 10pt;
+    color: #434343;
+    cursor: default;
+}
+
+.training-multiple-choice-answer-actual pre[class*="language-"] > code,
+.training-multiple-choice-answer-actual code[class*="language-"] > code {
+    font-size: 10pt;
+    background-color: transparent;
+}
+
+.training-multiple-choice-answer-actual * > code {
+    font-size: 12pt;
+    padding: 0 2px;
 }
 
 /* Side by Side */

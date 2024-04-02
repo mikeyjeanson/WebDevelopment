@@ -1,7 +1,7 @@
 import { html, render } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
 import TrainingStartPage from '../Components/trainingStartPage.js'
-import sideBySideQuestion from '../Components/sideBySideQuestion.js'
+import SideBySide from '../Components/sideBySide.js'
 import TrainingAnswer from '../Components/trainingAnswer.js'
 import trainingFetch from '../Components/trainingFetch.js'
 import TrainingFinished from '../Components/trainingFinished.js'
@@ -130,17 +130,18 @@ const TrainingApp = () => {
         return html`<${TrainingStartPage} listener=${startClick} />`
     }
     else if (mode == TrainingMode.Question) {
-        switch(currentQuestion.questionType) {
-            case 'Side by Side':
+        switch(currentQuestion.questionType.toLowerCase()) {
+            case 'side by side':
+                console.log('sxs')
                 return html`
-                    <${sideBySideQuestion} 
+                    <${SideBySide} 
                         questionAnsweredCallback=${questionAnswered} 
                         ...${currentQuestion}
                         backListener=${offset > 0 ? prevQuestionListener : null}
                         nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
                     />
                 `
-            case 'Multiple Choice':
+            case 'multiple choice':
                 return html`
                     <${MultipleChoice}
                         currentQuestion=${currentQuestion}

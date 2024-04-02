@@ -48,7 +48,9 @@ export default async function trainingFetch(sheetName, offset= 0) {
                 jsonData.table.rows.forEach(row => {
                     const rowObject = {}
                     labels.forEach((label, index) => {
-                        rowObject[label] = row.c[index].v // Access cell value
+                        if (row.c[index] != null) {
+                            rowObject[label] = row.c[index].v
+                        }
                     });
                     data.push(rowObject)
                 });
