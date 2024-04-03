@@ -1,11 +1,13 @@
 import { html, render } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
 import TrainingStartPage from '../Components/trainingStartPage.js'
-import SideBySide from '../Components/sideBySide.js'
 import TrainingAnswer from '../Components/trainingAnswer.js'
 import trainingFetch from '../Components/trainingFetch.js'
 import TrainingFinished from '../Components/trainingFinished.js'
+import Checklist from '../Components/checklist.js'
+import SideBySide from '../Components/sideBySide.js'
 import MultipleChoice from '../Components/multipleChoice.js'
+
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
@@ -41,7 +43,7 @@ document.getElementById('training-external-instructions').addEventListener('clic
 
 /****** MAIN APP ******/
 
-// Enumerator `TrainingMode` (Start, Question, Answer)
+// Enumerator `TrainingMode` (Start, Question, Answer, Finished)
 const TrainingMode = Object.freeze({
     Start: 'start',
     Question: 'question',
@@ -131,6 +133,15 @@ const TrainingApp = () => {
     }
     else if (mode == TrainingMode.Question) {
         switch(currentQuestion.questionType.toLowerCase()) {
+            case 'checklist':
+                return html`
+                    <${Checklist}
+                        currentQuestion=${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        questionAnsweredCallback=${questionAnswered}
+                        nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
+                    />
+                `
             case 'side by side':
                 console.log('sxs')
                 return html`
@@ -153,9 +164,11 @@ const TrainingApp = () => {
         }        
     }
     else if (mode == TrainingMode.Answer) {
+        const correct = answer == currentQuestion.answer
+
         return html`
             <${TrainingAnswer} 
-                correct=${answer == currentQuestion.answer} 
+                correct=${correct} 
                 reasonHTML=${currentQuestion.reason}
                 backListener=${backButtonListener}
                 nextListener=${nextQuestionListener}

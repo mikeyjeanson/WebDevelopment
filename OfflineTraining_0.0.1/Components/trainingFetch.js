@@ -14,13 +14,12 @@ export default async function trainingFetch(sheetName, offset= 0) {
     */
     
     // Query construction and URL generation
-    const query = `Select * ORDER BY A desc LIMIT 1 OFFSET ${offset}`;
+    const query = `Select * LIMIT 1 OFFSET ${offset}`;
     const encodedQuery = encodeURIComponent(query);
     const url = `${base}sheet=${sheetName}&tq=${encodedQuery}`;
 
     // Data storage and initialization
     const data = [];
-    if (debug) console.log(query, encodedQuery, url)
 
     return new Promise((resolve, reject) => {
         // Fetch data from Google Sheet API

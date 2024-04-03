@@ -538,7 +538,7 @@ hr {
     margin: 20px;
     margin-left: auto;
     margin-right: auto;
-    padding: 20px;
+    padding: 20px 40px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12);
 }
 
@@ -547,7 +547,10 @@ hr {
     margin: 4px; 
 }
 
-.training-question h1 h2 h3 h4,
+.training-question h1,
+.training-question h2,
+.training-question h3,
+.training-question h4,
 .training-question > p > strong { 
     /* Question Headers */
     color: var(--primary-color); 
@@ -636,7 +639,7 @@ hr {
     border-radius: inherit;
     padding: 10px 20px;
     min-width: 400px;
-    max-width: 900px;
+    max-width: 80%;
     background-color: var(--dark-primary-color);
 }
 
@@ -759,6 +762,16 @@ hr {
 .training-answer-reason code[class*="language-"] > code {
     font-size: 10pt;
     background-color: transparent;
+}
+
+.training-answer-page-response {
+    border-radius: 40px;
+    background-color: var(--dark-primary-color);
+    padding: 10px 30px;
+}
+
+.training-answer-page-response pre {
+    border-radius: 10px;
 }
 
 .training-instructions {
