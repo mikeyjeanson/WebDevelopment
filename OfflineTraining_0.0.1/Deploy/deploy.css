@@ -474,7 +474,6 @@ hr {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 500px;
     padding: 0 10vw 20px;
 }
 
@@ -485,6 +484,7 @@ hr {
 #training-main {
     background-color: var(--primary-color);
     width: 100%;
+    min-width: 500px;
     border-radius: 40px;
     margin-bottom: 20px;
 }
@@ -492,8 +492,7 @@ hr {
 .training-start-page {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    min-height: inherit;
+    align-items: stretch;
     color: white;
     border-radius: inherit;
     background-color: var(--dark-primary-color);
@@ -505,7 +504,6 @@ hr {
     justify-content: center;
     background-color: var(--primary-color);
     padding: 0 40px;
-    min-height: inherit;
     border-radius: inherit;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -514,10 +512,12 @@ hr {
 
 #training-start-button {
     background-color: white;
-    margin: auto;
     font-size: 34pt;
+    margin: 0 auto;
     padding: 20px 40px;
     border-radius: 34px;
+    text-align: center;
+    align-self: center;
 }
 
 #training-start-button:hover {
@@ -532,8 +532,6 @@ hr {
     background-color: white;
     flex-direction: column;
     border-radius: inherit;
-    min-width: 500px;
-    width: fit-content;
     max-width: 80%;
     margin: 20px;
     margin-left: auto;
@@ -544,7 +542,7 @@ hr {
 
 .training-question > * {
     max-width: 100%;
-    margin: 4px; 
+    margin: 4px;
 }
 
 .training-question h1,
@@ -638,7 +636,6 @@ hr {
     justify-content: space-evenly;
     border-radius: inherit;
     padding: 10px 20px;
-    min-width: 400px;
     max-width: 80%;
     background-color: var(--dark-primary-color);
 }
@@ -780,7 +777,7 @@ hr {
     justify-content: center;
     padding: 10px 20px;
     color: white;
-    min-height: 40px;
+    height: 40px;
 }
 
 .training-instructions h4 {
@@ -810,7 +807,7 @@ hr {
 }
 
 .training-answer-navigation p {
-    font-size: 10pt;
+    font-size: 12pt;
 }
 
 .training-back-arrow,
@@ -819,6 +816,7 @@ hr {
     stroke: white;
     cursor: pointer;
     width: 40px;
+    height: 40px;
 }
 
 .training-back-arrow *,

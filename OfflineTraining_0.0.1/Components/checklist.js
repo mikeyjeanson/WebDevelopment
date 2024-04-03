@@ -13,7 +13,7 @@ const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nex
     }
 
     const checkAnswer = () => {
-        questionAnsweredCallback(Array.from(selectedAnswer).join(', '))
+        questionAnsweredCallback(Array.from(selectedAnswer).join(','))
     }
 
     return html`

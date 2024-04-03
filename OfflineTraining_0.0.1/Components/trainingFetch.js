@@ -1,4 +1,4 @@
-const debug = true
+const debug = false
 
 export default async function trainingFetch(sheetName, offset= 0) {
     // Spreadsheet and sheet configuration
@@ -37,7 +37,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
                         const cleanLabel = heading.label
                             .toLowerCase()
                             .replace(/[\s+|_|\W](.)/g, match => match.toUpperCase()) // camel-case
-                            .replace(/\s/, ''); // remove whitespace
+                            .replace(/\s/g, ''); // remove whitespace
                         labels.push(cleanLabel);
                     }
                 });
@@ -48,7 +48,8 @@ export default async function trainingFetch(sheetName, offset= 0) {
                     const rowObject = {}
                     labels.forEach((label, index) => {
                         if (row.c[index] != null) {
-                            rowObject[label] = row.c[index].v
+                            // remove leading and following whitespace
+                            rowObject[label] = row.c[index].v.trim()
                         }
                     });
                     data.push(rowObject)

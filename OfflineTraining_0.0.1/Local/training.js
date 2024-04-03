@@ -164,7 +164,7 @@ const TrainingApp = () => {
         }        
     }
     else if (mode == TrainingMode.Answer) {
-        const correct = answer == currentQuestion.answer
+        const correct = answer == currentQuestion.answer.replace(/\s/g, ''); // remove whitespace
 
         return html`
             <${TrainingAnswer} 
