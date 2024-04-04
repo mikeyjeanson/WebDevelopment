@@ -8,7 +8,6 @@ import Checklist from '../Components/checklist.js'
 import SideBySide from '../Components/sideBySide.js'
 import MultipleChoice from '../Components/multipleChoice.js'
 
-
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
 const scripts = document.querySelectorAll('script[type="module"]');
@@ -83,7 +82,7 @@ const TrainingApp = () => {
     }
 
     const nextQuestionListener = () => {
-        setOffset(prevOffset => prevOffset + 1 )
+        setOffset(prevOffset => prevOffset + 1)
     }
 
     const prevQuestionListener = () => {
@@ -119,6 +118,7 @@ const TrainingApp = () => {
             .catch((error) => {
                 console.error(error)
                 setFetching(false)
+                setOffset(-1)
             })
         }
     }, [offset])
@@ -126,6 +126,7 @@ const TrainingApp = () => {
     useEffect(() => {
         // highlight possible code syntax
         Prism.highlightAll();
+        window.scrollTo(0, 0);
     }, [mode, currentQuestion]);
 
     if (mode == TrainingMode.Start) {
@@ -139,17 +140,16 @@ const TrainingApp = () => {
                         currentQuestion=${currentQuestion}
                         backListener=${offset > 0 ? prevQuestionListener : null}
                         questionAnsweredCallback=${questionAnswered}
-                        nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
+                        nextListener=${nextQuestionListener}
                     />
                 `
             case 'side by side':
-                console.log('sxs')
                 return html`
                     <${SideBySide} 
                         questionAnsweredCallback=${questionAnswered} 
                         ...${currentQuestion}
                         backListener=${offset > 0 ? prevQuestionListener : null}
-                        nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
+                        nextListener=${nextQuestionListener}
                     />
                 `
             case 'multiple choice':
@@ -158,13 +158,24 @@ const TrainingApp = () => {
                         currentQuestion=${currentQuestion}
                         backListener=${offset > 0 ? prevQuestionListener : null}
                         questionAnsweredCallback=${questionAnswered}
-                        nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
+                        nextListener=${nextQuestionListener}
                     />
                 `
         }        
     }
     else if (mode == TrainingMode.Answer) {
-        const correct = answer == currentQuestion.answer.replace(/\s/g, ''); // remove whitespace
+        // Formats answer to be sorted with no whitespace
+        const formatAnswer = (text) => {
+            let temp = []
+            text.split(',').forEach((element) => {
+                temp.push(element.replace(/\s/g, ''))
+            })
+            temp.sort()
+            return temp.join(',')
+        }
+        const expected = formatAnswer(currentQuestion.answer)
+        const actual = formatAnswer(answer)
+        const correct = actual == expected;
 
         return html`
             <${TrainingAnswer} 

@@ -1,4 +1,4 @@
-const debug = false
+const debug = debug
 
 export default async function trainingFetch(sheetName, offset= 0) {
     // Spreadsheet and sheet configuration
@@ -14,7 +14,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
     */
     
     // Query construction and URL generation
-    const query = `Select * LIMIT 1 OFFSET ${offset}`;
+    const query = `Select * OFFSET ${offset}`;
     const encodedQuery = encodeURIComponent(query);
     const url = `${base}sheet=${sheetName}&tq=${encodedQuery}`;
 
@@ -46,13 +46,17 @@ export default async function trainingFetch(sheetName, offset= 0) {
                 // Create data objects from each row
                 jsonData.table.rows.forEach(row => {
                     const rowObject = {}
+                    let completeObject = true
                     labels.forEach((label, index) => {
                         if (row.c[index] != null) {
                             // remove leading and following whitespace
                             rowObject[label] = row.c[index].v.trim()
                         }
+                        else if (label == 'answer' || label == 'prompt') {
+                            completeObject = false;
+                        }
                     });
-                    data.push(rowObject)
+                    if (completeObject) { data.push(rowObject) }
                 });
                 if (debug) console.log(data)
 
