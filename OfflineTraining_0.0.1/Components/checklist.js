@@ -4,6 +4,11 @@ import { useState, useEffect } from 'preact/hooks'
 const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nextListener}) => {
     const [selectedAnswer, setSelectedAnswer] = useState(new Set());
 
+    // Deselect Answer
+    useEffect(() => {
+        setSelectedAnswer(new Set())
+    }, [currentQuestion])
+
     const onClickHandler = (answer) => {
         setSelectedAnswer((prevAnswers) => {
             let copyAnswers = new Set(prevAnswers)
@@ -22,7 +27,7 @@ const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nex
                 <p innerHTML=${currentQuestion.prompt}></p>
             </div>
             <div class="training-multiple-choice-answers">
-                ${currentQuestion.answer && html`
+                ${currentQuestion.answerA && html`
                     <div class="training-multiple-choice-answer ${selectedAnswer.has('A') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('A')}>
                         <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
                         <div class="training-multiple-choice-answer-actual" innerHTML=${currentQuestion.answerA}></div>

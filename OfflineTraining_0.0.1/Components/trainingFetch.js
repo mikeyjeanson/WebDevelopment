@@ -1,4 +1,4 @@
-const debug = debug
+const debug = false
 
 export default async function trainingFetch(sheetName, offset= 0) {
     // Spreadsheet and sheet configuration
@@ -52,7 +52,7 @@ export default async function trainingFetch(sheetName, offset= 0) {
                             // remove leading and following whitespace
                             rowObject[label] = row.c[index].v.trim()
                         }
-                        else if (label == 'answer' || label == 'prompt') {
+                        else if (label == 'answerA' || label == 'prompt') {
                             completeObject = false;
                         }
                     });

@@ -1,10 +1,12 @@
 import { html, render } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
-import TrainingStartPage from 'sxs/Components/trainingStartPage.js'
-import TrainingQuestion from 'sxs/Components/trainingQuestion.js'
-import TrainingAnswer from 'sxs/Components/trainingAnswer.js'
-import trainingFetch from 'sxs/Components/trainingFetch.js'
-import TrainingFinished from 'sxs/Components/trainingFinished.js'
+import TrainingStartPage from '../Components/trainingStartPage.js'
+import TrainingAnswer from '../Components/trainingAnswer.js'
+import trainingFetch from '../Components/trainingFetch.js'
+import TrainingFinished from '../Components/trainingFinished.js'
+import Checklist from '../Components/checklist.js'
+import SideBySide from '../Components/sideBySide.js'
+import MultipleChoice from '../Components/multipleChoice.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
@@ -40,7 +42,7 @@ document.getElementById('training-external-instructions').addEventListener('clic
 
 /****** MAIN APP ******/
 
-// Enumerator `TrainingMode` (Start, Question, Answer)
+// Enumerator `TrainingMode` (Start, Question, Answer, Finished)
 const TrainingMode = Object.freeze({
     Start: 'start',
     Question: 'question',
@@ -80,7 +82,7 @@ const TrainingApp = () => {
     }
 
     const nextQuestionListener = () => {
-        setOffset(prevOffset => prevOffset + 1 )
+        setOffset(prevOffset => prevOffset + 1)
     }
 
     const prevQuestionListener = () => {
@@ -116,6 +118,7 @@ const TrainingApp = () => {
             .catch((error) => {
                 console.error(error)
                 setFetching(false)
+                setOffset(-1)
             })
         }
     }, [offset])
@@ -123,25 +126,61 @@ const TrainingApp = () => {
     useEffect(() => {
         // highlight possible code syntax
         Prism.highlightAll();
+        window.scrollTo(0, 0);
     }, [mode, currentQuestion]);
 
     if (mode == TrainingMode.Start) {
         return html`<${TrainingStartPage} listener=${startClick} />`
     }
     else if (mode == TrainingMode.Question) {
-        return html`
-            <${TrainingQuestion} 
-                questionAnsweredCallback=${questionAnswered} 
-                ...${currentQuestion}
-                backListener=${offset > 0 ? prevQuestionListener : null}
-                nextListener=${offset + 1 < questions.length ? nextQuestionListener : null}
-            />
-        `
+        switch(currentQuestion.questionType.toLowerCase()) {
+            case 'checklist':
+                return html`
+                    <${Checklist}
+                        currentQuestion=${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        questionAnsweredCallback=${questionAnswered}
+                        nextListener=${nextQuestionListener}
+                    />
+                `
+            case 'side by side':
+                return html`
+                    <${SideBySide} 
+                        questionAnsweredCallback=${questionAnswered} 
+                        ...${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        nextListener=${nextQuestionListener}
+                    />
+                `
+            case 'multiple choice':
+                return html`
+                    <${MultipleChoice}
+                        currentQuestion=${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        questionAnsweredCallback=${questionAnswered}
+                        nextListener=${nextQuestionListener}
+                    />
+                `
+        }        
     }
     else if (mode == TrainingMode.Answer) {
+        // Formats answer to be sorted with no whitespace
+        const formatAnswer = (text) => {
+            let temp = []
+            text.split(',').forEach((element) => {
+                temp.push(element.replace(/\s/g, ''))
+            })
+            temp.sort()
+            temp.pop('X')
+            return temp.join(',')
+        }
+        const expected = formatAnswer(currentQuestion.answer)
+        const actual = formatAnswer(answer)
+        const correct = actual == expected;
+
         return html`
             <${TrainingAnswer} 
-                correct=${answer == currentQuestion.answer} 
+                correct=${correct} 
                 reasonHTML=${currentQuestion.reason}
                 backListener=${backButtonListener}
                 nextListener=${nextQuestionListener}

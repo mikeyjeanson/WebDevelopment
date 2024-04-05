@@ -171,6 +171,7 @@ const TrainingApp = () => {
                 temp.push(element.replace(/\s/g, ''))
             })
             temp.sort()
+            temp.pop('X')
             return temp.join(',')
         }
         const expected = formatAnswer(currentQuestion.answer)

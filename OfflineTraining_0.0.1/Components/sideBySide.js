@@ -1,11 +1,9 @@
 import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/hooks'
 
-const SideBySide = ({ questionAnsweredCallback, prompt, answerA, answerB, backListener, nextListener }) => {
+const SideBySide = ({ questionAnsweredCallback, prompt, answerA, answerB, specialInstructions = '', backListener, nextListener }) => {
     const [answer, setAnswer] = useState('')
     const [timeDown, setTimeDown] = useState(Date.now())
-
-    console.log(questionAnsweredCallback, prompt, answerA, answerB, backListener, nextListener)
 
     // Deselect Answer
     useEffect(() => {
@@ -65,6 +63,7 @@ const SideBySide = ({ questionAnsweredCallback, prompt, answerA, answerB, backLi
         <div class="training-question">
             <p><strong>Prompt: </strong><span id="training-prompt-prompt" innerHTML=${prompt}></span></p>
         </div>
+        <h4 id="training-instructions-instructions">${specialInstructions != '' ? specialInstructions : 'Choose the best response'}</h4>
         <div class="training-responses-holder">
             <div class="training-response" onMouseDown=${handleDown} onMouseUp=${handleUp}>
                 <h3>Response A</h3>
@@ -76,7 +75,6 @@ const SideBySide = ({ questionAnsweredCallback, prompt, answerA, answerB, backLi
             </div>
         </div>
         <div class="training-instructions">
-            <h4 id="training-instructions-instructions">Choose the best response</h4>
             ${backListener ?
             html`
                 <svg title="Go Back" onClick=${backListener} viewBox="0 0 100 100" class="training-back-arrow">
