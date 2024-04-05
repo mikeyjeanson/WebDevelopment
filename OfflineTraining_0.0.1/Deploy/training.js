@@ -1,12 +1,12 @@
 import { html, render } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
-import TrainingStartPage from '../Components/trainingStartPage.js'
-import TrainingAnswer from '../Components/trainingAnswer.js'
-import trainingFetch from '../Components/trainingFetch.js'
-import TrainingFinished from '../Components/trainingFinished.js'
-import Checklist from '../Components/checklist.js'
-import SideBySide from '../Components/sideBySide.js'
-import MultipleChoice from '../Components/multipleChoice.js'
+import TrainingStartPage from 'training/Components/trainingStartPage.js'
+import TrainingAnswer from 'training/Components/trainingAnswer.js'
+import trainingFetch from 'training/Components/trainingFetch.js'
+import TrainingFinished from 'training/Components/trainingFinished.js'
+import Checklist from 'training/Components/checklist.js'
+import SideBySide from 'training/Components/sideBySide.js'
+import MultipleChoice from 'training/Components/multipleChoice.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
