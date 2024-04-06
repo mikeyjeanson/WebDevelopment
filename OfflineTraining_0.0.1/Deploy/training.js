@@ -166,12 +166,12 @@ const TrainingApp = () => {
     else if (mode == TrainingMode.Answer) {
         // Formats answer to be sorted with no whitespace
         const formatAnswer = (text) => {
+            text = text.replace('X', '')
             let temp = []
             text.split(',').forEach((element) => {
                 temp.push(element.replace(/\s/g, ''))
             })
             temp.sort()
-            temp.pop('X')
             return temp.join(',')
         }
         const expected = formatAnswer(currentQuestion.answer)
