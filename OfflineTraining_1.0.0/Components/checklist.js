@@ -11,7 +11,9 @@ const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nex
 
     const onClickHandler = (answer) => {
         setSelectedAnswer((prevAnswers) => {
+            if (answer === 'X') return new Set(answer)
             let copyAnswers = new Set(prevAnswers)
+            copyAnswers.delete('X')
             prevAnswers.has(answer) ? copyAnswers.delete(answer) : copyAnswers.add(answer)
             return copyAnswers
         });
@@ -51,6 +53,12 @@ const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nex
                         <div class="training-multiple-choice-answer-actual" innerHTML=${currentQuestion.answerD}></div>
                     </div>
                 `}
+                <div class="training-multiple-choice-answer ${selectedAnswer.has('X') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('X')}>
+                    <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
+                    <div class="training-multiple-choice-answer-actual"
+                        innerHTML=${currentQuestion.checklistLastOption ? currentQuestion.checklistLastOption : `<p>None of the above</p>`}>
+                    </div>
+                </div>
             </div>
             <div class="training-instructions">
                 ${backListener ?
@@ -61,7 +69,7 @@ const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nex
                         <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
                     </svg>
                 ` : ''}
-                ${selectedAnswer != '' ? 
+                ${selectedAnswer.size != 0 ? 
                 html`
                     <svg title="Next Question" onClick=${checkAnswer} viewBox="0 0 100 100" class="training-forward-arrow">
                         <line x1="73" y1="50" x2="43" y2="20" />
@@ -69,7 +77,7 @@ const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nex
                         <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
                     </svg>
                 ` : ''}
-                ${selectedAnswer == '' && nextListener ? 
+                ${selectedAnswer.size === 0 && nextListener ? 
                 html`
                     <svg title="Next Question" onClick=${nextListener} viewBox="0 0 100 100" class="training-forward-arrow">
                         <line x1="73" y1="50" x2="43" y2="20" />
