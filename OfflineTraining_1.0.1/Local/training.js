@@ -1,12 +1,14 @@
 import { html, render } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
-import TrainingStartPage from 'training/Components/trainingStartPage.js'
-import TrainingAnswer from 'training/Components/trainingAnswer.js'
-import trainingFetch from 'training/Components/trainingFetch.js'
-import TrainingFinished from 'training/Components/trainingFinished.js'
-import Checklist from 'training/Components/checklist.js'
-import SideBySide from 'training/Components/sideBySide.js'
-import MultipleChoice from 'training/Components/multipleChoice.js'
+import TrainingStartPage from '../Components/trainingStartPage.js'
+import TrainingAnswer from '../Components/trainingAnswer.js'
+import trainingFetch, { TrainingCount } from '../Components/trainingFetch.js'
+import TrainingFinished from '../Components/trainingFinished.js'
+import Checklist from '../Components/checklist.js'
+import SideBySide from '../Components/sideBySide.js'
+import MultipleChoice from '../Components/multipleChoice.js'
+import Matching from '../Components/matching.js'
+import Read from '../Components/read.js'
 
 // Dynamically import the module
 const moduleURL = new URL(import.meta.url);
@@ -23,6 +25,7 @@ for (const s of scripts) {
 }
 
 const project = script?.getAttribute('project')
+let numOfQuestions = -1
 
 // Set all of the anchor tags to open a new page no matter what
 const mainElement = document.getElementById('training-main')  
@@ -57,7 +60,7 @@ const TrainingApp = () => {
 
     const [mode, setMode] = useState(TrainingMode.Start)
     const [offset, setOffset] = useState(-1)
-    const [questions, addQuestion] = useState([])
+    const [questions, setQuestions] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState({
         'prompt': '',
         'responseA': '',
@@ -89,6 +92,45 @@ const TrainingApp = () => {
         setOffset(prevOffset => prevOffset - 1)
     }
 
+    const jumpToQuestion = (index) => {
+        if (index >= questions.length || index < 0) {
+            return
+        }
+
+        setOffset(index)
+        setMode(TrainingMode.Question)
+    }
+
+    // Jump Button Listener
+    useEffect(() => {
+        const jumpButton = document.getElementById('training-jump-button');
+        const handleClick = () => {
+            const index = parseInt(document.getElementById('training-jump-input').value)
+            if (!isNaN(index) && questions.length > 0) {
+                jumpToQuestion(index - 1)
+            }
+            document.getElementById('training-jump-input').value = ''
+        }
+    
+        jumpButton.addEventListener('click', handleClick);
+    
+        return () => {
+            jumpButton.removeEventListener('click', handleClick)
+        }
+    }, [questions])
+
+    useEffect(() => {
+        if (numOfQuestions == -1) {
+            document.getElementById('training-question-number-actual').innerHTML =`${offset + 1}`
+        }
+        else if (offset >= numOfQuestions) {
+            document.getElementById('training-question-number-actual').innerHTML = `Completed`
+        }
+        else {
+            document.getElementById('training-question-number-actual').innerHTML =`${offset + 1} / ${numOfQuestions}`
+        }
+    }, [offset, questions])
+
     /***** END OF CLICK LISTENERS ******/
 
     // Fetch New Question or Get Old Question
@@ -105,7 +147,7 @@ const TrainingApp = () => {
             .then((data) => {
                 if (data.length > 0) {
                     setCurrentQuestion(...data)
-                    addQuestion(prev => {
+                    setQuestions(prev => {
                         return [...prev, ...data]
                     })
                     setMode(TrainingMode.Question)
@@ -130,10 +172,34 @@ const TrainingApp = () => {
     }, [mode, currentQuestion]);
 
     if (mode == TrainingMode.Start) {
+        TrainingCount(project)
+            .then((count) => {
+                numOfQuestions = count
+            })
+            .catch(error => {
+                console.error(error)
+            })
         return html`<${TrainingStartPage} listener=${startClick} />`
     }
     else if (mode == TrainingMode.Question) {
         switch(currentQuestion.questionType.toLowerCase()) {
+            case 'read':
+                return html`
+                    <${Read}
+                        currentQuestion=${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        nextListener=${nextQuestionListener}
+                    />
+                `
+            case 'matching':
+                return html`
+                    <${Matching}
+                        currentQuestion=${currentQuestion}
+                        backListener=${offset > 0 ? prevQuestionListener : null}
+                        questionAnsweredCallback=${questionAnswered}
+                        nextListener=${nextQuestionListener}
+                    />
+                `
             case 'checklist':
                 return html`
                     <${Checklist}
@@ -166,7 +232,7 @@ const TrainingApp = () => {
     else if (mode == TrainingMode.Answer) {
         // Formats answer to be sorted with no whitespace
         const formatAnswer = (text) => {
-            text = text.replace('X', '')
+            text = text.toUpperCase().replace('X', '')
             let temp = []
             text.split(',').forEach((element) => {
                 temp.push(element.replace(/\s/g, ''))

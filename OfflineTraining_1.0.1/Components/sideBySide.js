@@ -61,9 +61,13 @@ const SideBySide = ({ questionAnsweredCallback, prompt, answerA, answerB, specia
 
     return html`
         <div class="training-question">
-            <p><strong>Prompt: </strong><span id="training-prompt-prompt" innerHTML=${prompt}></span></p>
+            <div id="training-prompt-prompt" innerHTML=${prompt}></div>
         </div>
-        <h4 id="training-instructions-instructions">${specialInstructions != '' ? specialInstructions : 'Choose the best response'}</h4>
+        ${specialInstructions && specialInstructions != 'none' && html`
+            <h4 id="training-instructions-instructions">
+                ${specialInstructions != '' ? specialInstructions : 'Choose the best response'}
+            </h4>
+        `}
         <div class="training-responses-holder">
             <div class="training-response" onMouseDown=${handleDown} onMouseUp=${handleUp}>
                 <h3>Response A</h3>

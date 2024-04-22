@@ -1,22 +1,26 @@
 import { html } from 'htm/preact'
 import { useState, useEffect } from 'preact/hooks'
 
-const MultipleChoice = ({currentQuestion, backListener, questionAnsweredCallback, nextListener}) => {
-    const [selectedAnswer, setSelectedAnswer] = useState('');
+const Checklist = ({currentQuestion, backListener, questionAnsweredCallback, nextListener}) => {
+    const [selectedAnswer, setSelectedAnswer] = useState(new Set());
 
     // Deselect Answer
     useEffect(() => {
-        setSelectedAnswer('')
+        setSelectedAnswer(new Set())
     }, [currentQuestion])
 
     const onClickHandler = (answer) => {
-        setSelectedAnswer(answer);
-        console.log('Selected answer:', answer);
+        setSelectedAnswer((prevAnswers) => {
+            if (answer === 'X') return new Set(answer)
+            let copyAnswers = new Set(prevAnswers)
+            copyAnswers.delete('X')
+            prevAnswers.has(answer) ? copyAnswers.delete(answer) : copyAnswers.add(answer)
+            return copyAnswers
+        });
     }
 
     const checkAnswer = () => {
-        console.log('checkAnswer')
-        questionAnsweredCallback(selectedAnswer)
+        questionAnsweredCallback(Array.from(selectedAnswer).join(','))
     }
 
     return html`
@@ -26,27 +30,35 @@ const MultipleChoice = ({currentQuestion, backListener, questionAnsweredCallback
             </div>
             <div class="training-multiple-choice-answers">
                 ${currentQuestion.answerA && html`
-                    <div class="training-multiple-choice-answer ${selectedAnswer === 'A' ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('A')}>
+                    <div class="training-multiple-choice-answer ${selectedAnswer.has('A') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('A')}>
                         <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
                         <div class="training-multiple-choice-answer-actual" innerHTML=${currentQuestion.answerA}></div>
                     </div>
                 `}
                 ${currentQuestion.answerB && html`
-                    <div class="training-multiple-choice-answer ${selectedAnswer === 'B' ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('B')}>
+                    <div class="training-multiple-choice-answer ${selectedAnswer.has('B') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('B')}>
                         <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
                         <div class="training-multiple-choice-answer-actual" innerHTML=${currentQuestion.answerB}></div>
                     </div>
                 `}
                 ${currentQuestion.answerC && html`
-                    <div class="training-multiple-choice-answer ${selectedAnswer === 'C' ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('C')}>
+                    <div class="training-multiple-choice-answer ${selectedAnswer.has('C') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('C')}>
                         <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
                         <div class="training-multiple-choice-answer-actual" innerHTML=${currentQuestion.answerC}></div>
                     </div>
                 `}
                 ${currentQuestion.answerD && html`
-                    <div class="training-multiple-choice-answer ${selectedAnswer === 'D' ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('D')}>
+                    <div class="training-multiple-choice-answer ${selectedAnswer.has('D') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('D')}>
                         <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
                         <div class="training-multiple-choice-answer-actual" innerHTML=${currentQuestion.answerD}></div>
+                    </div>
+                `}
+                ${(!currentQuestion.checklistLastOption || currentQuestion.checklistLastOption.toLowerCase() != 'none') && html`
+                    <div class="training-multiple-choice-answer ${selectedAnswer.has('X') ? 'bubble-selected-effect' : ''}" onClick=${() => onClickHandler('X')}>
+                        <div class="training-multiple-choice-bubble"><div class="bubble-fill"></div></div>
+                        <div class="training-multiple-choice-answer-actual"
+                            innerHTML=${currentQuestion.checklistLastOption ? currentQuestion.checklistLastOption : `<p>None of the above</p>`}>
+                        </div>
                     </div>
                 `}
             </div>
@@ -59,7 +71,7 @@ const MultipleChoice = ({currentQuestion, backListener, questionAnsweredCallback
                         <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
                     </svg>
                 ` : ''}
-                ${selectedAnswer != '' ? 
+                ${selectedAnswer.size != 0 ? 
                 html`
                     <svg title="Next Question" onClick=${checkAnswer} viewBox="0 0 100 100" class="training-forward-arrow">
                         <line x1="73" y1="50" x2="43" y2="20" />
@@ -67,7 +79,7 @@ const MultipleChoice = ({currentQuestion, backListener, questionAnsweredCallback
                         <circle cx="50" cy="50" r="49" fill="none" stroke-width="1"/>
                     </svg>
                 ` : ''}
-                ${selectedAnswer == '' && nextListener ? 
+                ${selectedAnswer.size === 0 && nextListener ? 
                 html`
                     <svg title="Next Question" onClick=${nextListener} viewBox="0 0 100 100" class="training-forward-arrow">
                         <line x1="73" y1="50" x2="43" y2="20" />
@@ -79,4 +91,4 @@ const MultipleChoice = ({currentQuestion, backListener, questionAnsweredCallback
         </div>
     `
 }
-export default MultipleChoice
+export default Checklist
