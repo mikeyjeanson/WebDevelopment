@@ -29,6 +29,7 @@ a:hover {
 button:hover {
     cursor: pointer;
     background-color: var(--opaque-primary-color);
+    color: white;
 }
 
 button:active {
