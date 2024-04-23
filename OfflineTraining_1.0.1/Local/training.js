@@ -101,21 +101,31 @@ const TrainingApp = () => {
         setMode(TrainingMode.Question)
     }
 
-    // Jump Button Listener
+    // Jump Button Listener and Enter Press
     useEffect(() => {
-        const jumpButton = document.getElementById('training-jump-button');
+        const jumpInput = document.getElementById('training-jump-input')
+        const jumpButton = document.getElementById('training-jump-button')
+
         const handleClick = () => {
-            const index = parseInt(document.getElementById('training-jump-input').value)
+            const index = parseInt(jumpInput.value)
             if (!isNaN(index) && questions.length > 0) {
                 jumpToQuestion(index - 1)
             }
             document.getElementById('training-jump-input').value = ''
         }
+
+        const handleEnter = (event) => {
+            if (event.key === 'Enter') {
+                handleClick()
+            }
+        }
     
         jumpButton.addEventListener('click', handleClick);
+        jumpInput.addEventListener('keypress', handleEnter)
     
         return () => {
             jumpButton.removeEventListener('click', handleClick)
+            jumpInput.removeEventListener('keypress', handleEnter)
         }
     }, [questions])
 
