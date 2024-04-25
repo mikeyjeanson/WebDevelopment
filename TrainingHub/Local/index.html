@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Define Page Colors-->
+    <style>
+        :root {
+            --primary-color: #247d78;
+            --dark-primary-color: #1b5e5a;
+            --opaque-primary-color: #247d7814;
+            --description-color: #434343;
+        }
+    </style> <!--End Page Colors-->
+    <!--Link Style Sheet-->
+    <link 
+        href="../styles.css" 
+        rel="stylesheet"
+    />
+    <!--Import Map-->
+    <script type="importmap">
+        {
+          "imports": {
+            "preact": "https://esm.sh/preact@10.19.2",
+            "preact/": "https://esm.sh/preact@10.19.2/",
+            "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+          }
+        }
+    </script>
+    <!--End of Import Map-->
+    <!--Project Specific-->
+    <!--End Project Specific-->
+    <title>Training Hub Vanilla</title>
+</head>
+<body>
+    <main class="content-main">
+        <div id="training-hub-container">
+            <div class="training-hub-header">
+                <h1>Vanilla Interactive Training Hub</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div id="training-hub-cards"></div>
+        </div><!--training-hub-container-->
+    </main>
+    <footer class="bulba-footer">
+        <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
+        <p>Please fill out <a href="https://forms.gle/iTwQG76LK57joHzw8">this form</a> to improve the site.</p>
+    </footer>
+    <!--CARD CONTAINER-->
+    <script>
+        window.trainings = [
+            {
+                'title': "Default Title",
+                'description' : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
+                'link' : 'https://www.google.com'
+            },
+            {
+                'title': "default title",
+                'description' : 'default description',
+                'link' : 'https://www.google.com'
+            },
+            {
+                'title': "default title",
+                'description' : 'default description',
+                'link' : 'https://www.google.com'
+            },
+            {
+                'title': "default title",
+                'description' : 'default description',
+                'link' : 'https://www.google.com'
+            },
+            {
+                'title': "Default Title",
+                'description' : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
+                'link' : 'https://www.google.com'
+            }
+        ]
+        console.log(window.trainings)
+    </script>
+    <!--END OF CONTAINER-->
+    <script
+        src="../trainingHub.js"
+        type="module"
+    ></script>
+</body>
+</html>
