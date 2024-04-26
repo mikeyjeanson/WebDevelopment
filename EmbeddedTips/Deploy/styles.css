@@ -95,6 +95,10 @@ a {
     align-items: center;
 }
 
+.tip-dropdown:hover {
+    cursor: pointer;
+}
+
 .tip-dropdown > h1 {
     color: var(--primary-color);
     font-family: "Lato", sans-serif;
