@@ -1,5 +1,5 @@
 import { html, render } from 'htm/preact'
-import HubCard from 'webdev/TrainingHub/Components/HubCard.js'
+import HubCard from 'webdev/TrainingHub/Components/hCard.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 
