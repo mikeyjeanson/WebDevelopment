@@ -1,8 +1,8 @@
-import { html, render } from 'htm/preact'
+import { html } from 'htm/preact'
 
 const HubCard = (props) => {
     const goToLink = () => {
-        window.location.href = props.link
+        window.open(props.link, '_blank')
     }
 
     return html`
