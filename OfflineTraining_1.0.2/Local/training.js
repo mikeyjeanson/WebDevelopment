@@ -32,16 +32,16 @@ const mainElement = document.getElementById('training-main')
 observeMainElement(mainElement);
 
 // Open External Instructions
-document.getElementById('training-external-instructions').addEventListener('click', (event) => {
-    // Prevent the default action of the click event
-    event.preventDefault();
+// document.getElementById('training-external-instructions').addEventListener('click', (event) => {
+//     // Prevent the default action of the click event
+//     event.preventDefault();
 
-    // Get the href attribute value of the button
-    const href = event.target.getAttribute('href');
+//     // Get the href attribute value of the button
+//     const href = event.target.getAttribute('href');
 
-    // Open the URL in a new tab
-    window.open(href, '_blank');
-});
+//     // Open the URL in a new tab
+//     window.open(href, '_blank');
+// });
 
 /****** MAIN APP ******/
 

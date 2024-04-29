@@ -9,6 +9,8 @@
             --primary-color: #247d78;
             --dark-primary-color: #1b5e5a;
             --opaque-primary-color: #247d7814;
+            --seventy-primary-color: #247d78cf;
+            --seventy-dark-color: #1b5e5a99;
             --description-color: #434343;
         }
     </style> <!--End Page Colors-->
@@ -37,7 +39,7 @@
     <!--End of Import Map-->
     <title>Offline Training</title>
 </head>
-<body>
+<body class="bulba-rays">
     <main class="content-main">
         <div class="training-header">
             <h1 class="training-header-title">Vanilla Offline Training</h1>
@@ -47,12 +49,6 @@
             </div>
             <div class="training-bottom">
                 <p class="training-question-number">Question: <span id="training-question-number-actual">0</span></p>
-                <button
-                    id="training-external-instructions" 
-                    href="https://docs.google.com/document/d/1rSrcuSg-m0g997-5TaXKtTNFBFxAjiHliWgUov3PJcs/view" 
-                    target="_blank">
-                    Vanilla Instructions
-                </button>
                 <div id="training-jump-div">
                     <input id="training-jump-input" type="text" placeholder="Question #">
                     <button id="training-jump-button">Jump</button>
@@ -60,14 +56,14 @@
             </div>
         </div>
     </main>
-    <footer class="bulba-footer">
+    <footer class="bulba-footer" style="background-color: transparent;">
         <p>Experiencing <i>issues</i>? Have you found a broken <i>link</i> or <i>typo</i>? Or do you just have a suggestion for the site? </p>
         <p>Please fill out <a href="https://forms.gle/iTwQG76LK57joHzw8">this form</a> to improve the site.</p>
     </footer>
     <script
         src="./training.js"
         type="module"
-        project="Bulba: ICE Vanilla"
+        project="Vanilla Error Recovery"
     ></script>
 </body>
 </html>
