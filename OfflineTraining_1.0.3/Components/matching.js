@@ -23,7 +23,7 @@ const Matching = ({currentQuestion, backListener, questionAnsweredCallback, next
                 // If the current question is one-to-one (as opposed to many-to-one or one-to-many)
                 // Remove any existing pairs with the same value and set
                 // the existing pairs to default option (in this case: '--')
-                if (currentQuestion.oneToOne.toUpperCase() === 'TRUE') {
+                if (currentQuestion.oneToOne?.toUpperCase() === 'TRUE') {
                     for (const [key, value] of newPairs.entries()) {
                         if (value === val) {
                             newPairs.delete(key)
