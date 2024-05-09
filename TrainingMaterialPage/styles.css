@@ -324,6 +324,7 @@ hr {
 
 .guide-card {
     flex: 0 1 320px;
+    max-width: 640px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -393,7 +394,8 @@ hr {
 #training-material-container {
     display: flex;
     flex-wrap: wrap;
-    place-content: center;
+    justify-content: left;
+    align-items: center;
     margin: 30px 12vw;
 }
 
