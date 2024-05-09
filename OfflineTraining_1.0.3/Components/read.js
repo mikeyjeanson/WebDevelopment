@@ -3,14 +3,9 @@ import { html } from 'htm/preact'
 const Read = ({currentQuestion, backListener, nextListener}) => {
     return html`
         <div class="training-matching">
-            <h4 id="training-instructions-instructions" style="margin-bottom: 0">
-                ${currentQuestion.specialInstructions ? currentQuestion.specialInstructions : 'Please read, then continue'}
-            </h4>
-            <div 
-                class="training-question" 
-                innerHTML=${currentQuestion.prompt}
-                style="margin-bottom: 0"
-            ></div>
+            <div class="training-question">
+                <p innerHTML=${currentQuestion.prompt}></p>
+            </div>
             <div class="training-instructions">
                 ${backListener ?
                 html`

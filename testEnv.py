@@ -31,10 +31,11 @@ df['Cost'] = df['Cost'].apply(replace_abbreviations)
 df['Cost'] = pd.to_numeric(df['Cost'])
 
 # Plotting
-plt.figure(figsize=(10, 6))
-sns.barplot(data=df, x='Category', y='Cost', ci=None)
+plt.figure(figsize=(12, 6))
+sns.set_theme(style="darkgrid")  # Set the theme/style here
+sns.scatterplot(data=df, x='Category', y='Cost', palette='rocket')
 plt.title('Cost per Category')
 plt.xlabel('Category')
 plt.ylabel('Cost')
-plt.xticks(rotation=45)
+plt.xticks(rotation=90)
 plt.show()

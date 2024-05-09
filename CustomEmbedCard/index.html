@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Embed Card</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+    :root {
+        --primary-color: pink;
+        --font-color: white;
+    }
+    body {
+        font-family: 'Lato', sans-serif;
+        padding: 4vh;
+    }
+
+    #card {
+        display: flex;
+        flex-direction: column;
+        min-height: 80vh;
+        width: 80vh;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        border-radius: 10px;
+        color: var(--font-color);
+        cursor: pointer;
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 4px 2px #00000024;
+    }
+
+    #card:hover {
+        box-shadow: 0 4px 8px 4px #00000024;
+    }
+
+    #card h1 {
+        font-weight: 300;
+    }
+</style>
+<body>
+    <div id="card" href="https://www.google.com">
+        <h1>Flamingo</h1>
+    </div>
+</body>
+<script>
+    document.getElementById('card').addEventListener('click', (event) => {
+        event.preventDefault();
+        window.open(event.target.getAttribute('href'), '_blank');
+    });
+</script>
+</html>

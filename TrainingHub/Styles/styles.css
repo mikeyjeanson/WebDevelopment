@@ -1127,6 +1127,7 @@ hr {
     flex: 1;
     display: none;
     text-align: center;
+    max-width: 600px;
 }
 
 .hub-card:hover p {
