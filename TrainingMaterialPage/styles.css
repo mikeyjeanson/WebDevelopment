@@ -394,7 +394,7 @@ hr {
 #training-material-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     margin: 30px 12vw;
 }
